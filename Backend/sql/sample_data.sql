@@ -153,3 +153,30 @@ insert into host_listing(username, listing_id) values('hostI', 9);
 insert into host_listing(username, listing_id) values('hostI', 10);
 insert into host_listing(username, listing_id) values('hostJ', 17);
 insert into host_listing(username, listing_id) values('hostJ', 18);
+
+CREATE TABLE listing_type(
+    listing_id integer PRIMARY KEY,
+    type_name varchar(30),
+    foreign key(listing_id) references Listing(listing_id),
+    foreign key(type_name) references Type(name));
+
+-- full house, apartment, private room, shared room
+-- listing-type
+insert into listing_type(listing_id, type_name) values(1, 'apartment');
+insert into listing_type(listing_id, type_name) values(2, 'apartment');
+insert into listing_type(listing_id, type_name) values(3, 'full house');
+insert into listing_type(listing_id, type_name) values(4, 'full house');
+insert into listing_type(listing_id, type_name) values(5, 'private room');
+insert into listing_type(listing_id, type_name) values(6, 'shared room');
+insert into listing_type(listing_id, type_name) values(7, 'private room');
+insert into listing_type(listing_id, type_name) values(8, 'shared room');
+insert into listing_type(listing_id, type_name) values(9, 'apartment');
+insert into listing_type(listing_id, type_name) values(10, 'apartment');
+insert into listing_type(listing_id, type_name) values(11, 'full house');
+insert into listing_type(listing_id, type_name) values(12, 'apartment');
+insert into listing_type(listing_id, type_name) values(13, 'full house');
+insert into listing_type(listing_id, type_name) values(14, 'shared room');
+insert into listing_type(listing_id, type_name) values(15, 'private room');
+insert into listing_type(listing_id, type_name) values(16, 'apartment');
+insert into listing_type(listing_id, type_name) values(17, 'shared room');
+insert into listing_type(listing_id, type_name) values(18, 'private room');
