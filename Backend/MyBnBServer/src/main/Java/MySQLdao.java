@@ -16,11 +16,12 @@ public class MySQLdao {
     	this.connection = DriverManager.getConnection(url, username, password);
     }
 
-    public void insertPokemon(String name, String pid, String description, String type1, String type2) {
-        return;
-    }
-
-    public String getPokemon(String pid){
-    	return "";
+    public boolean authenticateLogin(String username, String password) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT * FROM user WHERE username=\"" +
+    	username + "\" and password=\"" + password + "\"");
+    	ResultSet rs = execStat.executeQuery();
+    	
+    	return rs.next();
     }
 }
