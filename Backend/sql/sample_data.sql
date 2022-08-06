@@ -134,3 +134,22 @@ insert into listing(longitude, latitude, address, country, city, postal_code, ba
 insert into listing(longitude, latitude, address, country, city, postal_code, base_price) values (49.316862, -122.984668, '1120 Strathaven Dr', 'Canada', 'Vancouver', 'V7H 2Z6', 97.00);
 insert into listing(longitude, latitude, address, country, city, postal_code, base_price) values (49.286046, -123.139464, '1661 Davie St', 'Canada', 'Vancouver', 'V6G 0E1', 95.00);
 insert into listing(longitude, latitude, address, country, city, postal_code, base_price) values (49.279411, -123.120807, '4188 Yew St', 'Canada', 'Vancouver', 'V6J 0G3', 87.00);
+
+--host-listing
+insert into host_listing(username, listing_id) values('hostA', 1);
+insert into host_listing(username, listing_id) values('hostB', 12);
+insert into host_listing(username, listing_id) values('hostB', 13);
+insert into host_listing(username, listing_id) values('hostB', 14);
+insert into host_listing(username, listing_id) values('hostC', 2);
+insert into host_listing(username, listing_id) values('hostC', 15);
+insert into host_listing(username, listing_id) values('hostD', 3);
+insert into host_listing(username, listing_id) values('hostD', 4);
+insert into host_listing(username, listing_id) values('hostE', 5);
+insert into host_listing(username, listing_id) values('hostF', 6);
+insert into host_listing(username, listing_id) values('hostG', 7);
+insert into host_listing(username, listing_id) values('hostH', 16);
+insert into host_listing(username, listing_id) values('hostI', 8);
+insert into host_listing(username, listing_id) values('hostI', 9);
+insert into host_listing(username, listing_id) values('hostI', 10);
+insert into host_listing(username, listing_id) values('hostJ', 17);
+insert into host_listing(username, listing_id) values('hostJ', 18);
