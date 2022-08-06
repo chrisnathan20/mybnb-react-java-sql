@@ -61,7 +61,7 @@ public class Endpoint implements HttpHandler {
         System.out.println(method + " method for the path " + path);
         
         if (path.contains("/mybnb/register")){
-            this.handleLogin(r);
+            this.handleRegister(r);
         }
         else if (path.contains("/mybnb/login")){
             this.handleLogin(r);
@@ -122,5 +122,61 @@ public class Endpoint implements HttpHandler {
             e.printStackTrace();
             r.sendResponseHeaders(500, -1);
         }
+    }
+   
+    public void handleRegister(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String username, password, name, address, country, city, postal_code, dob, sin, payment_info;
+
+            if (deserialized.has("username") && deserialized.has("password") && deserialized.has("name")
+            	&& deserialized.has("address") && deserialized.has("country") && deserialized.has("city")
+            	&& deserialized.has("postal_code") && deserialized.has("dob") && deserialized.has("sin")) {
+            	
+                username = deserialized.getString("username");
+                password = deserialized.getString("password");
+                name = deserialized.getString("name");
+                address = deserialized.getString("address");
+                country = deserialized.getString("country");
+                city = deserialized.getString("city");
+                postal_code = deserialized.getString("postal_code");
+                dob = deserialized.getString("dob");
+                sin = deserialized.getString("sin");
+                
+            } 
+            else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+
+            try {
+                if(!this.dao.checkUsername(username)) {
+                	this.dao.RegisterUser(username, name, address, country, city, postal_code, dob, sin, password);
+                	System.out.println("Registration Successful for " + username);
+                    if(deserialized.has("payment_info")) {
+                    	payment_info = deserialized.getString("payment_info");
+                        this.dao.RegisterRenter(username, payment_info);
+                        System.out.println("Registration of renter successful for " + username);
+                    }
+                    r.sendResponseHeaders(200, -1);
+                    return;
+                }
+                else {
+                	r.sendResponseHeaders(400, -1);
+                	System.out.println("Register Failed, username taken");
+                	return;
+                }
+            } catch (Exception e) {
+                r.sendResponseHeaders(500, -1);
+                e.printStackTrace();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+
     }
 }
