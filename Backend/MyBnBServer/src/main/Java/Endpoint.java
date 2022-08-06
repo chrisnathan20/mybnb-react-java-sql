@@ -3,6 +3,7 @@ package main.Java;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Hashtable;
 import java.util.Random;
@@ -88,15 +89,23 @@ public class Endpoint implements HttpHandler {
 
             try {
                 if(this.dao.authenticateLogin(username, password)) {
-                	r.sendResponseHeaders(200, -1);	
                 	Random rand = new Random();
                 	int session = rand.nextInt();
                 	
-                	while(sessionUsername.containsKey(session)) {
+                	while(sessionUsername.containsKey(session) || session<=0) {
                 		session = rand.nextInt();
                 	}
                 	
                 	sessionUsername.put(session, username);
+                	
+                	JSONObject response = new JSONObject();
+                    response.put("sessionId", session);
+                    
+                    String responseString = response.toString();
+                    r.sendResponseHeaders(200, responseString.length());	
+                    OutputStream os = r.getResponseBody();
+                    os.write(responseString.getBytes());
+                    os.close();
                 	
                 	System.out.println("Login Successful for " + sessionUsername.get(session) + " with Session Number " + session);
                 }

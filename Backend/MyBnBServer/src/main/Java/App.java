@@ -6,7 +6,7 @@ import java.net.InetSocketAddress;
 import java.sql.SQLException;
 
 public class App {
-    static int PORT = 8080;
+    static int PORT = 5000;
 
     public static void main(String[] args) throws IOException, SQLException {
         HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", PORT), 0);
