@@ -1,0 +1,92 @@
+#landing_slogan{
+    font-weight: bold;
+    font-size: 70px;
+    margin-bottom: 60px;
+}
+
+#home_in_slogan{
+    color: #D77866;
+}
+#image{
+    margin-left: -30px;
+}
+
+img{
+    width: 500px;
+}
+
+#landing_right_card button{
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    padding: 15px 0px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    width: 70%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 35px;
+}
+
+#login{
+    background-color: #6C9C8E;
+}
+
+#signup{
+    background-color: #6C9C8E;
+}
+
+#welcome_text{
+    font-size: 40px;
+    font-weight: 600;
+}
+
+#my{
+    color:#6C9C8E;
+}
+#bnb{
+    color: #D77866;
+}
+
+#mybnb{
+    font-weight: bold;
+}
+
+button:hover{
+    transform: scale(1.03);
+}
+
+#landing_right_card{
+    background-color: white;
+    padding: 40px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.25);
+    border-radius: 45px;
+    width: 450px;
+    height: 350px;
+    text-align: center;
+}
+
+#landing_page{
+    display: flex;
+    align-items: center;
+    margin-top: 150px;
+    margin-left: 300px;
+}
+
+#left{
+    width: 50%;
+}
+
+#right{
+    width: 50%;
+    margin-top: 20px;
+}
+
+#start_by{
+    font-size: 24px;
+}
+
+#top_text{
+    text-align: left;
+    margin-bottom: 40px;
+}
