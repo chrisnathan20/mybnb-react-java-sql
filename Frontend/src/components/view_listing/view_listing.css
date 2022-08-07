@@ -37,6 +37,7 @@
 #view_listing_card{
     background-color: white;
     padding: 30px;
+    padding-bottom: 0px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     width: 70%;
@@ -71,7 +72,7 @@
 }
 
 #amenities{
-    font-size: 16px;
+    font-size: 18px;
     color: 	gray; 
 }
 
