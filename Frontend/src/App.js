@@ -22,12 +22,12 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage/>} />
           <Route path='/login' element={<LoginPage/>} />
-          <Route path = '/home/:sessionId' element={<Home/>}/>
+          <Route path = '/home/:id' element={<Home/>}/>
           <Route path = '/initial-register' element={<InitialRegister/>}/>
           <Route path = '/host-register' element={<HostRegister/>}/>
           <Route path = '/renter-register' element={<RenterRegister/>}/>
-          <Route path = '/view-listing' element={<ViewListing/>}/>
-          <Route path = '/explore/:sessionId' element={<Explore/>}/>
+          <Route path = '/view-listing/:id' element={<ViewListing/>}/>
+          <Route path = '/explore/:id' element={<Explore/>}/>
         </Routes>
       </Router>
     </>
