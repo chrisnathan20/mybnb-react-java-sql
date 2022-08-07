@@ -36,34 +36,24 @@ function explore() {
         );*/
         setListings([
             {
-                type: "Apartment",
-                address: "60 Town Centre Court",
-                country: "Canada",
-                city: "Scarborough",
-                postal_code: "M1P 0B1",
-                distance: 150,
-                price: 100,
-                amenities: "Air conditioning, Gym access"
+                "type": "Apartment",
+                "address": "60 Town Centre Court",
+                "country": "Canada",
+                "city": "Scarborough",
+                "postal_code": "M1P 0B1",
+                "distance": 150,
+                "price": 100.00,
+                "amenities": "Air conditioning, Gym access"
             },
             {
-                type: "House",
-                address: "30 Town Centre Court",
-                country: "Canada",
-                city: "Scarborough",
-                postal_code: "M1P 4K9",
-                distance: 1000,
-                price: 125,
-                amenities: "First aid kit, Gym access"
-            },
-            {
-                type: "Apartment",
-                address: "60 Town Centre Court",
-                country: "Canada",
-                city: "Scarborough",
-                postal_code: "M1P 0B1",
-                distance: 150,
-                price: 100,
-                amenities: "Air conditioning, Gym access"
+                "type": "House",
+                "address": "30 Town Centre Court",
+                "country": "Canada",
+                "city": "Scarborough",
+                "postal_code": "M1P 4K9",
+                "distance": 1000,
+                "price": 125.00,
+                "amenities": "First aid kit, Gym access"
             },
             {
                 type: "Apartment",
@@ -72,7 +62,7 @@ function explore() {
                 city: "Scarborough",
                 postal_code: "M1P 0B1",
                 distance: 150,
-                price: 100,
+                price: 100.00,
                 amenities: "Air conditioning, Gym access"
             },
             {
@@ -82,7 +72,17 @@ function explore() {
                 city: "Scarborough",
                 postal_code: "M1P 0B1",
                 distance: 150,
-                price: 100,
+                price: 100.00,
+                amenities: "Air conditioning, Gym access"
+            },
+            {
+                type: "Apartment",
+                address: "60 Town Centre Court",
+                country: "Canada",
+                city: "Scarborough",
+                postal_code: "M1P 0B1",
+                distance: 150,
+                price: 100.00,
                 amenities: "Air conditioning, Gym access"
             }
         ]

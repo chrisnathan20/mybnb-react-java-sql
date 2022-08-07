@@ -1,0 +1,126 @@
+.date_booking{
+    border: none;
+    padding: 15px;
+    border-radius: 30px;
+    width: 95%;
+    background-color: #EFF2F5;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+#top_view_listing_right{
+    width: 20%;
+    background-color: white;
+}
+
+#top_view_listing{
+    display: flex;
+    margin-bottom: 50px;
+}
+
+#first_row_view_listing{
+    display: flex;
+    justify-content: space-between;
+}
+
+#second_row_view_listing{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#last_row_view_listing{
+    display: flex;
+    justify-content: space-between;
+}
+
+#view_listing_card{
+    background-color: white;
+    padding: 30px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    width: 70%;
+    margin-right: 30px;
+}
+
+#header{
+    font-size: 28px;
+    font-weight: 600;
+}
+
+#price{
+    color: #D77866;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+#location{
+    color: gray;
+    font-size: 18px;
+}
+
+#per_night{
+    font-size: 14px;
+    color: 	#A9A9A9;
+}
+
+#distance{
+    font-size: 16px;
+    color: 	gray;
+    margin-bottom: 10px;
+}
+
+#amenities{
+    font-size: 16px;
+    color: 	gray; 
+}
+
+#book_button{
+    color:#D77866;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #f7ebe9;
+    margin-bottom: -5px;
+}
+
+#top_view_listing_right{
+    background-color: white;
+    padding: 30px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    width: 30%;
+    text-align: center;
+}
+
+#book_now{
+    background-color: #6C9C8E;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#view_listing_second_row{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+#future_unavail_view{
+    width: 50%;
+}
+
+#special_prices_view{
+    width: 50%;
+}
+
+#view_listing_page{
+    margin: 30px 150px;
+}
