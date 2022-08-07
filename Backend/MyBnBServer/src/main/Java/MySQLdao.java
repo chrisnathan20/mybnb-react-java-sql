@@ -66,7 +66,7 @@ public class MySQLdao {
         return (int) Math.round(d*1000); // meters
     }
     
-    public String getListings(String sortby, String address, String city, String country, String postalcode, Double latitude, Double longitude, Double minprice, Double maxprice, int distance) throws SQLException {
+    public String getListings(String sortby, String address, String city, String country, String postalcode, Double latitude, Double longitude, Double minprice, Double maxprice, int distance, String start, String end) throws SQLException {
     	PreparedStatement execStat=connection.prepareStatement("SELECT * from mybnb.listing where address like '%" + address + "%' and country like '%" + country + "%' and city like '%" + city + "%' and postal_code like '%" + postalcode + "%' and base_price >= " + minprice + " and base_price <= " + maxprice + "order by base_price ASC");
     	ResultSet rs = execStat.executeQuery();
     	
@@ -120,31 +120,43 @@ public class MySQLdao {
     		listing.put("price", rs.getDouble("base_price"));
     		listing.put("distance", calculateDistance(latitude, longitude, rs.getDouble("latitude"), rs.getDouble("longitude")));
     		
-    		
-    		if((int)listing.get("distance") <= distance) {
-    			if(sortby.equals("distance")){
-    				int i = 0;
-    				boolean added = false;
-    				
-    				while(i < response.size() && !added) {
-    					if ((int)response.get(i).get("distance") > (int)listing.get("distance")) {
-    						added = true;
-    						response.add(i, listing);
-    					}
-    					i++;
-    				}
-    				
-    				if(!added) {
-    					response.add(listing);
-    				}
-    			}else {
-    				response.add(listing);
-    			}
+    		if(this.isAvailable(rs.getInt("listing_id"), start, end)) {
+	    		if((int)listing.get("distance") <= distance) {
+	    			if(sortby.equals("distance")){
+	    				int i = 0;
+	    				boolean added = false;
+	    				
+	    				while(i < response.size() && !added) {
+	    					if ((int)response.get(i).get("distance") > (int)listing.get("distance")) {
+	    						added = true;
+	    						response.add(i, listing);
+	    					}
+	    					i++;
+	    				}
+	    				
+	    				if(!added) {
+	    					response.add(listing);
+	    				}
+	    			}else {
+	    				response.add(listing);
+	    			}
+	    		}
     		}
     	}
 
     	
     	System.out.println(response.toString());
     	return response.toString();
+    }
+    
+    public boolean isAvailable(int id, String start, String end) throws SQLException {
+    	PreparedStatement execStat1=connection.prepareStatement("select * from mybnb.listing_unavailability where listing_id ="+ id +" and '"+ start +"' between initial_date and end_date");
+    	ResultSet rs1 = execStat1.executeQuery();
+    	PreparedStatement execStat2=connection.prepareStatement("select * from mybnb.listing_unavailability where listing_id ="+ id +" and '"+ end +"' between initial_date and end_date");
+    	ResultSet rs2 = execStat2.executeQuery();
+    	PreparedStatement execStat3=connection.prepareStatement("select * from mybnb.listing_unavailability where listing_id ="+ id +" and initial_date between " + start + " and " + end);
+    	ResultSet rs3 = execStat3.executeQuery();
+    	
+    	return !(rs1.next() || rs2.next() || rs3.next());
     }
 }
