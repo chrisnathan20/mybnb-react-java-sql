@@ -4,30 +4,25 @@ import FutureUnavail from "./future_unavailabilities/future_unavailabilities";
 import Comment from "./comments/comments";
 import { Icon } from '@iconify/react';
 import './view_listing.css'
+import { useNavigate, useParams } from "react-router-dom";
 
 function ViewListing() {
     const[listing, setListing] = useState('');
     const[start, setStart] = useState('');
     const[end, setEnd] = useState('');
+    const {id} = useParams(); 
+    console.log(id);
     useEffect(() => {
         // this is where we should send the fetch request, sample code below
-        /*fetch("http://localhost:5000/fetch-service-providers", {credentials: 'include'}).then(response =>
+        fetch('/mybnb/getviewlisting/' + id, {
+            method: 'GET',
+            headers: {"Content-Type": "application/json"},
+            credentials: "include",}).then(response =>
           response.json().then(data => {
-            setAllSp(data);
+            setListing(data);
+            console.log(data);
           })
-        );*/
-        setListing(
-            {
-                "type": "Apartment",
-                "address": "60 Town Centre Court",
-                "country": "Canada",
-                "city": "Scarborough",
-                "postal_code": "M1P 0B1",
-                "distance": 150,
-                "price": 100.00,
-                "amenities": "Air conditioning, Gym access"
-            }
-        )
+        );
     }, []);
   return (
     <body id="view_listing_page">
@@ -41,7 +36,7 @@ function ViewListing() {
                     <div id="location"><Icon icon="fa6-solid:map-location-dot" inline={true} style={{ verticalAlign: '-0.2em', fontSize:'22px', marginRight: '7px'}}/>{listing.city}, {listing.country} {listing.postal_code}</div>
                     <div id="per_night">per night</div>
                 </div>
-                <div id="distance"><Icon icon="ri:pin-distance-line" inline={true} style={{ verticalAlign: '-0.3em', fontSize:'30px', marginRight: '7px'}}/>{listing.distance}m away</div>
+                <div id="distance"><Icon icon="tabler:world" inline={true} style={{ verticalAlign: '-0.3em', fontSize:'30px', marginRight: '7px'}}/>{listing.latitude}, {listing.longitude}</div>
                 <div id="last_row_view_listing">
                     <div id="amenities"><Icon icon="bi:card-checklist" inline={true} style={{ verticalAlign: '-0.3em', fontSize:'30px', marginRight: '7px'}}/>{listing.amenities}</div>
                 </div>

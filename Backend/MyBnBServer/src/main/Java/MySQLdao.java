@@ -66,7 +66,50 @@ public class MySQLdao {
         return (int) Math.round(d*1000); // meters
     }
     
+    public String getViewListings(int listing_id) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT * FROM listing WHERE listing_id=" +
+    	listing_id);
+    	ResultSet rs = execStat.executeQuery();
+    	rs.next();
+    	
+    	PreparedStatement execam=connection.prepareStatement("select * from mybnb.listing_amenity where listing_id = " + listing_id);
+    	ResultSet rsam = execam.executeQuery();
+    	
+        PreparedStatement execType=connection.prepareStatement("select * from mybnb.listing_type where listing_id = " + listing_id);
+    	ResultSet rsType = execType.executeQuery();
+    	rsType.next();
+
+    	String amenity = "";
+    	
+    	if(rsam.next()) {
+    		amenity = amenity + rsam.getString("amenity_name");
+    	}
+    	
+    	if(rsam.next()) {
+    		amenity = amenity  + ", " + rsam.getString("amenity_name");
+    	}
+    	
+    	if(rsam.next()) {
+    		amenity = amenity  + ", " + rsam.getString("amenity_name") + " and more";
+    	}
+    	
+    	JSONObject response = new JSONObject();
+    	response.put("type", rsType.getString("type_name"));
+    	response.put("address", rs.getString("address"));
+    	response.put("country", rs.getString("country"));
+    	response.put("city", rs.getString("city"));
+    	response.put("postal_code", rs.getString("postal_code"));
+    	response.put("price", rs.getDouble("base_price"));
+    	response.put("latitude", rs.getDouble("latitude"));
+    	response.put("longitude", rs.getDouble("longitude"));
+    	response.put("amenities", amenity);
+    	
+    	return response.toString();
+    }
+    
     public String getListings(String sortby, String address, String city, String country, String postalcode, Double latitude, Double longitude, Double minprice, Double maxprice, int distance, String start, String end) throws SQLException {
+
     	PreparedStatement execStat=connection.prepareStatement("SELECT * from mybnb.listing where address like '%" + address + "%' and country like '%" + country + "%' and city like '%" + city + "%' and postal_code like '%" + postalcode + "%' and base_price >= " + minprice + " and base_price <= " + maxprice + "order by base_price ASC");
     	ResultSet rs = execStat.executeQuery();
     	
