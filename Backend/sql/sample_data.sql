@@ -18,7 +18,7 @@
             -> renter A has 8 bookings (2 cancelled, 5 completed, 1 upcoming)
             -> renter B has 6 bookings (1 cancelled, 3 completed, 2 upcoming)
             -> renter C has 4 bookings (1 cancelled, 3 completed)
-            -> renter D has 5 bookings (4 cancelled, 1 upcoming)
+            -> renter D has 4 bookings (4 cancelled)
 
 
 -4 types
@@ -107,7 +107,7 @@ insert into amenities(name) values ('Laptop-friendly workspace');
 insert into amenities(name) values ('Pets allowed');
 insert into amenities(name) values ('Crib');
 insert into amenities(name) values ('High chair');
-insert into amenities(name) values ('Bathub');
+insert into amenities(name) values ('Bathtub');
 insert into amenities(name) values ('Carbon Monoxide Alarm');
 insert into amenities(name) values ('Smoke Alarm');
 insert into amenities(name) values ('Fire Extinguisher');
@@ -135,7 +135,7 @@ insert into listing(longitude, latitude, address, country, city, postal_code, ba
 insert into listing(longitude, latitude, address, country, city, postal_code, base_price) values (49.286046, -123.139464, '1661 Davie St', 'Canada', 'Vancouver', 'V6G 0E1', 95.00);
 insert into listing(longitude, latitude, address, country, city, postal_code, base_price) values (49.279411, -123.120807, '4188 Yew St', 'Canada', 'Vancouver', 'V6J 0G3', 87.00);
 
---host-listing
+-- host-listing
 insert into host_listing(username, listing_id) values('hostA', 1);
 insert into host_listing(username, listing_id) values('hostB', 12);
 insert into host_listing(username, listing_id) values('hostB', 13);
@@ -153,12 +153,6 @@ insert into host_listing(username, listing_id) values('hostI', 9);
 insert into host_listing(username, listing_id) values('hostI', 10);
 insert into host_listing(username, listing_id) values('hostJ', 17);
 insert into host_listing(username, listing_id) values('hostJ', 18);
-
-CREATE TABLE listing_type(
-    listing_id integer PRIMARY KEY,
-    type_name varchar(30),
-    foreign key(listing_id) references Listing(listing_id),
-    foreign key(type_name) references Type(name));
 
 -- full house, apartment, private room, shared room
 -- listing-type
@@ -180,3 +174,262 @@ insert into listing_type(listing_id, type_name) values(15, 'private room');
 insert into listing_type(listing_id, type_name) values(16, 'apartment');
 insert into listing_type(listing_id, type_name) values(17, 'shared room');
 insert into listing_type(listing_id, type_name) values(18, 'private room');
+
+-- listing_amenity
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(3, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(4, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(5, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(6, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(7, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(8, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(9, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(11, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(12, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(13, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(14, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(15, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(16, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(17, 'Wifi');
+insert into listing_amenity(listing_id, amenity_name) values(18, 'Wifi');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Gym Access');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Gym Access');
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Gym Access');
+insert into listing_amenity(listing_id, amenity_name) values(12, 'Gym Access');
+insert into listing_amenity(listing_id, amenity_name) values(16, 'Gym Access');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Pool Access');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Pool Access');
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Pool Access');
+insert into listing_amenity(listing_id, amenity_name) values(12, 'Pool Access');
+insert into listing_amenity(listing_id, amenity_name) values(16, 'Pool Access');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Kitchen');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Kitchen');
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Kitchen');
+insert into listing_amenity(listing_id, amenity_name) values(12, 'Kitchen');
+insert into listing_amenity(listing_id, amenity_name) values(16, 'Kitchen');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Free parking');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Free parking');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Washer');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Washer');
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Washer');
+insert into listing_amenity(listing_id, amenity_name) values(16, 'Washer');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Dryer');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Dryer');
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Dryer');
+insert into listing_amenity(listing_id, amenity_name) values(16, 'Dryer');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(3, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(4, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(5, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(7, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(9, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(11, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(12, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(13, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(15, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(16, 'Air conditioning');
+insert into listing_amenity(listing_id, amenity_name) values(18, 'Air conditioning');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(3, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(4, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(5, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(7, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(9, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(11, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(12, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(13, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(15, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(16, 'Heating');
+insert into listing_amenity(listing_id, amenity_name) values(18, 'Heating');
+
+insert into listing_amenity(listing_id, amenity_name) values(3, 'Self check-in');
+insert into listing_amenity(listing_id, amenity_name) values(4, 'Self check-in');
+insert into listing_amenity(listing_id, amenity_name) values(13, 'Self check-in');
+insert into listing_amenity(listing_id, amenity_name) values(18, 'Self check-in');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(3, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(4, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(5, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(7, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(9, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(11, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(12, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(13, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(15, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(16, 'Laptop-friendly workspace');
+insert into listing_amenity(listing_id, amenity_name) values(18, 'Laptop-friendly workspace');
+
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Bathtub');
+insert into listing_amenity(listing_id, amenity_name) values(12, 'Bathtub');
+insert into listing_amenity(listing_id, amenity_name) values(16, 'Bathtub');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Pets allowed');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Pets allowed');
+insert into listing_amenity(listing_id, amenity_name) values(9, 'Pets allowed');
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Pets allowed');
+
+insert into listing_amenity(listing_id, amenity_name) values(3, 'Crib');
+insert into listing_amenity(listing_id, amenity_name) values(3, 'High Chair');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Carbon Monoxide Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Carbon Monoxide Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(7, 'Carbon Monoxide Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(18, 'Carbon Monoxide Alarm');
+
+insert into listing_amenity(listing_id, amenity_name) values(1, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(2, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(3, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(4, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(5, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(6, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(7, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(8, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(9, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(10, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(11, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(12, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(13, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(14, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(15, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(16, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(17, 'Smoke Alarm');
+insert into listing_amenity(listing_id, amenity_name) values(18, 'Smoke Alarm');
+
+insert into listing_amenity(listing_id, amenity_name) values(3, 'Fire Extinguisher');
+insert into listing_amenity(listing_id, amenity_name) values(4, 'Fire Extinguisher');
+insert into listing_amenity(listing_id, amenity_name) values(11, 'Fire Extinguisher');
+insert into listing_amenity(listing_id, amenity_name) values(13, 'Fire Extinguisher');
+
+insert into listing_amenity(listing_id, amenity_name) values(3, 'First-aid kit');
+insert into listing_amenity(listing_id, amenity_name) values(4, 'First-aid kit');
+insert into listing_amenity(listing_id, amenity_name) values(11, 'First-aid kit');
+insert into listing_amenity(listing_id, amenity_name) values(13, 'First-aid kit');
+
+insert into listing_amenity(listing_id, amenity_name) values(13, 'Step-free entryway');
+insert into listing_amenity(listing_id, amenity_name) values(13, 'Accessible bathroom');
+
+-- special prices
+insert into Special_prices(listing_id, initial_date, end_date, price) values(1, '2022-08-14', '2022-08-20', 100.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(1, '2022-09-04', '2022-09-10', 120.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(4, '2022-09-11', '2022-09-15', 150.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(4, '2022-09-20', '2022-09-27', 130.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(4, '2022-10-01', '2022-10-04', 140.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(9, '2022-08-14', '2022-08-18', 110.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(9, '2022-09-01', '2022-09-05', 100.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(9, '2022-10-01', '2022-10-04', 80.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(9, '2022-10-10', '2022-10-15', 90.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(17, '2022-08-21', '2022-08-25', 105.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(17, '2022-09-01', '2022-09-07', 90.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(17, '2022-09-17', '2022-09-20', 85.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(17, '2022-09-25', '2022-09-30', 100.00);
+insert into Special_prices(listing_id, initial_date, end_date, price) values(17, '2022-10-01', '2022-10-05', 80.00);
+
+-- booking (listing unavailability)
+insert into listing_unavailability(initial_date, end_date, listing_id) values('2022-08-15', '2022-08-18', 1);
+insert into booking(booking_id, total_cost, status) values(1, 300.00, "upcoming");
+insert into booking_renter(booking_id, username) values(1, 'renterA');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values('2022-06-15', '2022-06-17', 10);
+insert into booking(booking_id, total_cost, status) values(2, 168.00, "completed");
+insert into booking_renter(booking_id, username) values(2, 'renterA');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values('2022-05-05', '2022-05-09', 1);
+insert into booking(booking_id, total_cost, status) values(3, 320.00, "completed");
+insert into booking_renter(booking_id, username) values(3, 'renterA');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values('2022-04-25', '2022-04-29', 1);
+insert into booking(booking_id, total_cost, status) values(4, 320.00, "completed");
+insert into booking_renter(booking_id, username) values(4, 'renterA');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values('2022-04-02', '2022-04-07', 15);
+insert into booking(booking_id, total_cost, status) values(5, 450.00, "completed");
+insert into booking_renter(booking_id, username) values(5, 'renterA');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values('2022-03-12', '2022-03-17', 15);
+insert into booking(booking_id, total_cost, status) values(6, 450.00, "completed");
+insert into booking_renter(booking_id, username) values(6, 'renterA');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values(NULL, NULL, 8);
+insert into booking(booking_id, total_cost, status) values(7, 250.00, "cancelled");
+insert into booking_renter(booking_id, username) values(7, 'renterA');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values(NULL, NULL, 17);
+insert into booking(booking_id, total_cost, status) values(8, 190.00, "cancelled");
+insert into booking_renter(booking_id, username) values(8, 'renterA');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values("2022-08-25", "2022-08-27", 12);
+insert into booking(booking_id, total_cost, status) values(9, 210.00, "upcoming");
+insert into booking_renter(booking_id, username) values(9, 'renterB');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values("2022-09-27", "2022-09-29", 12);
+insert into booking(booking_id, total_cost, status) values(10, 210.00, "upcoming");
+insert into booking_renter(booking_id, username) values(10, 'renterB');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values("2022-04-27", "2022-04-29", 12);
+insert into booking(booking_id, total_cost, status) values(11, 210.00, "completed");
+insert into booking_renter(booking_id, username) values(11, 'renterB');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values("2022-04-17", "2022-04-19", 13);
+insert into booking(booking_id, total_cost, status) values(12, 240.00, "completed");
+insert into booking_renter(booking_id, username) values(12, 'renterB');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values('2022-04-10', '2022-04-15', 15);
+insert into booking(booking_id, total_cost, status) values(13, 450.00, "completed");
+insert into booking_renter(booking_id, username) values(13, 'renterB');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values(NULL, NULL, 2);
+insert into booking(booking_id, total_cost, status) values(14, 240.00, "cancelled");
+insert into booking_renter(booking_id, username) values(14, 'renterB');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values('2022-03-25', '2022-03-29', 1);
+insert into booking(booking_id, total_cost, status) values(15, 320.00, "completed");
+insert into booking_renter(booking_id, username) values(15, 'renterC');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values('2022-03-02', '2022-03-07', 15);
+insert into booking(booking_id, total_cost, status) values(16, 450.00, "completed");
+insert into booking_renter(booking_id, username) values(16, 'renterC');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values('2022-02-12', '2022-02-17', 15);
+insert into booking(booking_id, total_cost, status) values(17, 450.00, "completed");
+insert into booking_renter(booking_id, username) values(17, 'renterC');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values(NULL, NULL, 2);
+insert into booking(booking_id, total_cost, status) values(18, 320.00, "cancelled");
+insert into booking_renter(booking_id, username) values(18, 'renterC');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values(NULL, NULL, 2);
+insert into booking(booking_id, total_cost, status) values(19, 320.00, "cancelled");
+insert into booking_renter(booking_id, username) values(19, 'renterC');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values(NULL, NULL, 2);
+insert into booking(booking_id, total_cost, status) values(20, 320.00, "cancelled");
+insert into booking_renter(booking_id, username) values(20, 'renterD');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values(NULL, NULL, 2);
+insert into booking(booking_id, total_cost, status) values(21, 400.00, "cancelled");
+insert into booking_renter(booking_id, username) values(21, 'renterD');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values(NULL, NULL, 18);
+insert into booking(booking_id, total_cost, status) values(22, 174.00, "cancelled");
+insert into booking_renter(booking_id, username) values(22, 'renterD');
+
+insert into listing_unavailability(initial_date, end_date, listing_id) values(NULL, NULL, 18);
+insert into booking(booking_id, total_cost, status) values(23, 348.00, "cancelled");
+insert into booking_renter(booking_id, username) values(23, 'renterD');
