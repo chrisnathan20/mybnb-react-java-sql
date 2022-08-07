@@ -7,6 +7,7 @@
 #home_in_slogan{
     color: #D77866;
 }
+
 #image{
     margin-left: -30px;
 }
@@ -15,7 +16,7 @@ img{
     width: 500px;
 }
 
-#landing_right_card button{
+#login_card button{
     border: none;
     cursor: pointer;
     border-radius: 40px;
@@ -23,9 +24,9 @@ img{
     font-size: 24px;
     font-weight: bold;
     color: white;
-    width: 65%;
+    width: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-bottom: 35px;
+    margin-top: 30px;
 }
 
 #login{
@@ -56,7 +57,7 @@ button:hover{
     transform: scale(1.03);
 }
 
-#landing_right_card{
+#login_card{
     background-color: white;
     padding: 40px;
     box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.25);
@@ -66,28 +67,42 @@ button:hover{
     text-align: center;
 }
 
-#landing_page{
+#login_page{
     display: flex;
     align-items: center;
     margin-top: 150px;
     margin-left: 300px;
 }
 
-#left{
+#login_left{
     width: 50%;
 }
 
-#right{
+#login_right{
     width: 50%;
     margin-top: 20px;
 }
 
 #start_by{
     font-size: 24px;
-    font-weight: 600;
 }
 
 #top_text{
     text-align: left;
     margin-bottom: 40px;
+}
+
+#login_card input{
+    margin: 15px;
+    width: 300px;
+    border: 2px solid lightgray;
+    border-radius: 30px;
+    padding: 15px;
+    font-size: 16px;
+    padding-left: 20px;
+    margin-bottom: 30px;
+}
+
+#login_card input:focus{
+    outline: 5px auto Highlight;
 }
