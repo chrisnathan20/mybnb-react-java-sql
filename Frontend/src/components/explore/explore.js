@@ -237,7 +237,7 @@ function explore() {
                     </div>
 
                     <div className='filter'>
-                        <label for="maxDis">Max Distance</label><br/>
+                        <label for="maxDis">Max Distance (in metres)</label><br/>
                         <input id="maxDis" name="maxDis" type="text" value={maxDis} onChange={(e) => setMaxDis(e.target.value)}/>
                     </div>
 
