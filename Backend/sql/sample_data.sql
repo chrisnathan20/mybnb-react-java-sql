@@ -97,20 +97,10 @@ insert into amenities(name) values ('Pool Access');
 insert into amenities(name) values ('Gym Access');
 insert into amenities(name) values ('Wifi');
 insert into amenities(name) values ('Kitchen');
-insert into amenities(name) values ('Free parking');
 insert into amenities(name) values ('Washer');
 insert into amenities(name) values ('Dryer');
-insert into amenities(name) values ('Air conditioning');
-insert into amenities(name) values ('Heating');
-insert into amenities(name) values ('Self check-in');
-insert into amenities(name) values ('Laptop-friendly workspace');
 insert into amenities(name) values ('Pets allowed');
-insert into amenities(name) values ('Crib');
-insert into amenities(name) values ('High chair');
 insert into amenities(name) values ('Bathtub');
-insert into amenities(name) values ('Carbon Monoxide Alarm');
-insert into amenities(name) values ('Smoke Alarm');
-insert into amenities(name) values ('Fire Extinguisher');
 insert into amenities(name) values ('First-aid kit');
 insert into amenities(name) values ('Step-free entryway');
 insert into amenities(name) values ('Accessible bathroom');
@@ -213,9 +203,6 @@ insert into listing_amenity(listing_id, amenity_name) values(10, 'Kitchen');
 insert into listing_amenity(listing_id, amenity_name) values(12, 'Kitchen');
 insert into listing_amenity(listing_id, amenity_name) values(16, 'Kitchen');
 
-insert into listing_amenity(listing_id, amenity_name) values(1, 'Free parking');
-insert into listing_amenity(listing_id, amenity_name) values(2, 'Free parking');
-
 insert into listing_amenity(listing_id, amenity_name) values(1, 'Washer');
 insert into listing_amenity(listing_id, amenity_name) values(2, 'Washer');
 insert into listing_amenity(listing_id, amenity_name) values(10, 'Washer');
@@ -226,56 +213,6 @@ insert into listing_amenity(listing_id, amenity_name) values(2, 'Dryer');
 insert into listing_amenity(listing_id, amenity_name) values(10, 'Dryer');
 insert into listing_amenity(listing_id, amenity_name) values(16, 'Dryer');
 
-insert into listing_amenity(listing_id, amenity_name) values(1, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(2, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(3, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(4, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(5, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(7, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(9, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(10, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(11, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(12, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(13, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(15, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(16, 'Air conditioning');
-insert into listing_amenity(listing_id, amenity_name) values(18, 'Air conditioning');
-
-insert into listing_amenity(listing_id, amenity_name) values(1, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(2, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(3, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(4, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(5, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(7, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(9, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(10, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(11, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(12, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(13, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(15, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(16, 'Heating');
-insert into listing_amenity(listing_id, amenity_name) values(18, 'Heating');
-
-insert into listing_amenity(listing_id, amenity_name) values(3, 'Self check-in');
-insert into listing_amenity(listing_id, amenity_name) values(4, 'Self check-in');
-insert into listing_amenity(listing_id, amenity_name) values(13, 'Self check-in');
-insert into listing_amenity(listing_id, amenity_name) values(18, 'Self check-in');
-
-insert into listing_amenity(listing_id, amenity_name) values(1, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(2, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(3, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(4, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(5, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(7, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(9, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(10, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(11, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(12, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(13, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(15, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(16, 'Laptop-friendly workspace');
-insert into listing_amenity(listing_id, amenity_name) values(18, 'Laptop-friendly workspace');
-
 insert into listing_amenity(listing_id, amenity_name) values(10, 'Bathtub');
 insert into listing_amenity(listing_id, amenity_name) values(12, 'Bathtub');
 insert into listing_amenity(listing_id, amenity_name) values(16, 'Bathtub');
@@ -284,38 +221,6 @@ insert into listing_amenity(listing_id, amenity_name) values(1, 'Pets allowed');
 insert into listing_amenity(listing_id, amenity_name) values(2, 'Pets allowed');
 insert into listing_amenity(listing_id, amenity_name) values(9, 'Pets allowed');
 insert into listing_amenity(listing_id, amenity_name) values(10, 'Pets allowed');
-
-insert into listing_amenity(listing_id, amenity_name) values(3, 'Crib');
-insert into listing_amenity(listing_id, amenity_name) values(3, 'High Chair');
-
-insert into listing_amenity(listing_id, amenity_name) values(1, 'Carbon Monoxide Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(2, 'Carbon Monoxide Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(7, 'Carbon Monoxide Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(18, 'Carbon Monoxide Alarm');
-
-insert into listing_amenity(listing_id, amenity_name) values(1, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(2, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(3, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(4, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(5, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(6, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(7, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(8, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(9, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(10, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(11, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(12, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(13, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(14, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(15, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(16, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(17, 'Smoke Alarm');
-insert into listing_amenity(listing_id, amenity_name) values(18, 'Smoke Alarm');
-
-insert into listing_amenity(listing_id, amenity_name) values(3, 'Fire Extinguisher');
-insert into listing_amenity(listing_id, amenity_name) values(4, 'Fire Extinguisher');
-insert into listing_amenity(listing_id, amenity_name) values(11, 'Fire Extinguisher');
-insert into listing_amenity(listing_id, amenity_name) values(13, 'Fire Extinguisher');
 
 insert into listing_amenity(listing_id, amenity_name) values(3, 'First-aid kit');
 insert into listing_amenity(listing_id, amenity_name) values(4, 'First-aid kit');

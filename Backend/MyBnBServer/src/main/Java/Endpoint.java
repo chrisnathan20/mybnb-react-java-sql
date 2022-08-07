@@ -44,13 +44,64 @@ public class Endpoint implements HttpHandler {
         // Confirmation to terminal/console if http request is received by server
         System.out.println(method + " method for the path " + path);
         
-        if (path.contains("/mybnb/getprofile")){
-            this.handleLogin(r);
+        if (path.contains("/mybnb/getlisting")){
+            this.handleGetListings(r);
         }
         else {
             r.sendResponseHeaders(500, -1);
             return;
         }
+    }
+    
+    public void handleGetListings(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String sortby, address, city, country, postalcode;
+            Double latitude, longitude, minprice, maxprice;
+            int distance;
+
+            if (deserialized.has("sortby") && deserialized.has("latitude") && deserialized.has("longitude")
+            	&& deserialized.has("distance") && deserialized.has("minprice") && deserialized.has("maxprice")
+            	&& deserialized.has("address") && deserialized.has("city") && deserialized.has("country") && deserialized.has("postalcode")) {
+            	
+                sortby = deserialized.getString("sortby");
+                address = deserialized.getString("address");
+                city = deserialized.getString("city");
+                country = deserialized.getString("country");
+                postalcode = deserialized.getString("postalcode");
+                
+                latitude = deserialized.getDouble("latitude");
+                longitude = deserialized.getDouble("longitude");
+                minprice = deserialized.getDouble("minprice");
+                maxprice = deserialized.getDouble("maxprice");
+                
+                distance = deserialized.getInt("distance");
+                
+                
+            } 
+            else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+
+            try {
+            	String responseString = this.dao.getListings(sortby, address, city, country, postalcode, latitude, longitude, minprice, maxprice, distance);
+            	r.sendResponseHeaders(200, responseString.length());	
+                OutputStream os = r.getResponseBody();
+                os.write(responseString.getBytes());
+                os.close();            
+            } catch (Exception e) {
+                r.sendResponseHeaders(500, -1);
+                e.printStackTrace();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+
     }
     
     public void handlePost(HttpExchange r) throws IOException, JSONException {
