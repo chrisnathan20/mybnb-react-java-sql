@@ -75,7 +75,7 @@ public class MySQLdao {
     	while (rs.next()) {
     		
         	JSONObject listing = new JSONObject();
-            listing.put("sessionId", rs.getInt("listing_id"));
+            listing.put("listingId", rs.getInt("listing_id"));
             
             PreparedStatement execType=connection.prepareStatement("select * from mybnb.listing_type where listing_id = " + rs.getInt("listing_id"));
         	ResultSet rsType = execType.executeQuery();
