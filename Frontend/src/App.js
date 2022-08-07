@@ -6,6 +6,7 @@ import Home from './components/home/home';
 import InitialRegister from './components/initial_register/initial_register';
 import HostRegister from './components/host_register/host_register';
 import RenterRegister from './components/renter_register/renter_register';
+import Explore from './components/explore/explore';
 import {
   BrowserRouter as Router,
   Routes,
@@ -24,6 +25,7 @@ function App() {
           <Route path = '/initial-register' element={<InitialRegister/>}/>
           <Route path = '/host-register' element={<HostRegister/>}/>
           <Route path = '/renter-register' element={<RenterRegister/>}/>
+          <Route path = '/explore' element={<Explore/>}/>
         </Routes>
       </Router>
     </>
