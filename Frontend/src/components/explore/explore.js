@@ -14,6 +14,8 @@ function explore() {
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
     const [postalCode, setPostalCode] = useState('');
+    const [start, setStart] = useState('2022-08-08');
+    const [end, setEnd] = useState('2022-08-09')
 
     const [noFilter, setNoFilter] = React.useState(0);
     const [poolFilter, setPoolFilter] = useState(false);
@@ -40,6 +42,8 @@ function explore() {
         requestbody.minprice = minPrice;
         requestbody.maxprice = maxPrice;
         requestbody.address = address;
+        requestbody.start_date = start;
+        requestbody.end_date = end;
 
         fetch('/mybnb/getlisting', {
             method: 'POST',
@@ -67,6 +71,8 @@ function explore() {
         requestbody.minprice = minPrice;
         requestbody.maxprice = maxPrice;
         requestbody.address = address;
+        requestbody.start_date = start;
+        requestbody.end_date = end;
 
         fetch('/mybnb/getlisting', {
             method: 'POST',
@@ -219,7 +225,7 @@ function explore() {
         <body id="explore_page">
             <div id="explore_left">
                 <form>
-                <button type="submit" id="apply_filters" onClick={handleClick}>Apply Filters Below</button>
+                    <button type="submit" id="apply_filters" onClick={handleClick}>Apply Filters Below</button>
                     <div className='filter'>
                         <label for="sortBy">Sort By</label><br/>
                         <input id="sortBy" name="sortBy" type="text" value={sortBy} onChange={(e) => setSortBy(e.target.value)}/>
@@ -267,7 +273,17 @@ function explore() {
 
                     <div className='filter'>
                         <label for="postalCode">Postal Code</label><br/>
-                        <input id="postalCode" name="postalCOde" type="text" value={postalCode} onChange={(e) => setPostalCode(e.target.value)}/>
+                        <input id="postalCode" name="postalCode" type="text" value={postalCode} onChange={(e) => setPostalCode(e.target.value)}/>
+                    </div>
+
+                    <div className='filter'>
+                        <label for="start">Start Date</label><br/>
+                        <input id="start" name="start" type="date" value={start} onChange={(e) => setStart(e.target.value)}/>
+                    </div>
+
+                    <div className='filter'>
+                        <label for="end">End Date</label><br/>
+                        <input id="end" name="end" type="date" value={end} onChange={(e) => setEnd(e.target.value)}/>
                     </div>
                     <div id="checklist">
                         <div id="amenities_header">Amenities: </div>
