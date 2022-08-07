@@ -117,7 +117,7 @@ public class MySQLdao {
     		listing.put("country", rs.getString("country"));
     		listing.put("city", rs.getString("city"));
     		listing.put("postal_code", rs.getString("postal_code"));
-    		listing.put("base_price", rs.getDouble("base_price"));
+    		listing.put("price", rs.getDouble("base_price"));
     		listing.put("distance", calculateDistance(latitude, longitude, rs.getDouble("latitude"), rs.getDouble("longitude")));
     		
     		
@@ -144,6 +144,7 @@ public class MySQLdao {
     	}
 
     	
+    	System.out.println(response.toString());
     	return response.toString();
     }
 }

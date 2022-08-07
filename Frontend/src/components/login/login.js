@@ -27,7 +27,7 @@ function login() {
         }).then(response => {
           if (response.ok) {
             response.json().then(data => {
-                navigate('/home/' + data.sessionId);
+                navigate('/explore/' + data.sessionId);
             });
           }
           else if (response.status == 400) {

@@ -44,13 +44,9 @@ public class Endpoint implements HttpHandler {
         // Confirmation to terminal/console if http request is received by server
         System.out.println(method + " method for the path " + path);
         
-        if (path.contains("/mybnb/getlisting")){
-            this.handleGetListings(r);
-        }
-        else {
-            r.sendResponseHeaders(500, -1);
-            return;
-        }
+
+        r.sendResponseHeaders(500, -1);
+        return;
     }
     
     public void handleGetListings(HttpExchange r) throws IOException {
@@ -82,6 +78,7 @@ public class Endpoint implements HttpHandler {
                 
             } 
             else {
+            	System.out.println("fails here because " + deserialized.has("longitude"));
                 r.sendResponseHeaders(400, -1);
                 return;
             }
@@ -111,7 +108,10 @@ public class Endpoint implements HttpHandler {
         // Confirmation to terminal/console if http request is received by server
         System.out.println(method + " method for the path " + path);
         
-        if (path.contains("/mybnb/register")){
+        if (path.contains("/mybnb/getlisting")){
+            this.handleGetListings(r);
+        }
+        else if (path.contains("/mybnb/register")){
             this.handleRegister(r);
         }
         else if (path.contains("/mybnb/login")){
