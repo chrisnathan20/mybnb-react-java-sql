@@ -75,7 +75,11 @@ CREATE TABLE Comment(
     comment_id integer AUTO_INCREMENT PRIMARY KEY,
     title varchar(20),
     content varchar(255),
-    rating integer);
+    rating integer,
+    forUsername varchar(20),
+    fromUsername varchar(20),
+    foreign key(forUsername) references User(username),
+    foreign key(fromUsername) references User(username));
 
 CREATE TABLE host_listing(
     username varchar(20),

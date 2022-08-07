@@ -26,8 +26,8 @@ function App() {
           <Route path = '/initial-register' element={<InitialRegister/>}/>
           <Route path = '/host-register' element={<HostRegister/>}/>
           <Route path = '/renter-register' element={<RenterRegister/>}/>
-          <Route path = '/explore' element={<Explore/>}/>
           <Route path = '/view-listing' element={<ViewListing/>}/>
+          <Route path = '/explore/:sessionId' element={<Explore/>}/>
         </Routes>
       </Router>
     </>
