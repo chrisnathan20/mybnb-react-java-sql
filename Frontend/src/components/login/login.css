@@ -106,3 +106,7 @@ button:hover{
 #login_card input:focus{
     outline: 5px auto Highlight;
 }
+
+#error_message_login{
+    color: red;
+}

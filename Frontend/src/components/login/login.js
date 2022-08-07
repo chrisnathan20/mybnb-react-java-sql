@@ -8,6 +8,7 @@ function login() {
     // Initial values is empty
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(false);
 
     // Form submission handler
     const handleSubmit = (e) => {
@@ -28,6 +29,9 @@ function login() {
             response.json().then(data => {
                 navigate('/home/' + data.sessionId);
             });
+          }
+          else if (response.status == 400) {
+           setError(true);
           }
           else { // response is not ok
             throw new Error(response.statusText)
@@ -50,6 +54,7 @@ function login() {
 
             <div id="login_right">
                 <div id="login_card">
+                    {error && <div id="error_message_login">Incorrect username or password!</div>}
                     <form>
                         <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
                         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
