@@ -373,6 +373,17 @@ public class MySQLdao {
     	return response.toString();
     }
     
+    public void addUnavailable(int listing_id, String start, String end) throws SQLException {
+    	
+    	PreparedStatement execStat1=connection.prepareStatement("insert into listing_unavailability(initial_date, end_date, listing_id) values('" + start + "', '" + end + "', " + listing_id + ")");
+    	execStat1.execute();
+    }
+    
+    public void addSpecial(int listing_id, String start, String end, Double price) throws SQLException {
+    	PreparedStatement execStat1=connection.prepareStatement("insert into Special_prices(listing_id, initial_date, end_date, price) values(" + listing_id + ", '" + start + "', '" + end + "', " + price +")");
+    	execStat1.execute();
+    }
+    
     public boolean isAvailable(int id, String start, String end) throws SQLException {
     	PreparedStatement execStat1=connection.prepareStatement("select * from mybnb.listing_unavailability where listing_id ="+ id +" and '"+ start +"' between initial_date and end_date");
     	ResultSet rs1 = execStat1.executeQuery();
