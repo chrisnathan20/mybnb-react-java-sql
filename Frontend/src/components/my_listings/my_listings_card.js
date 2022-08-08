@@ -21,9 +21,13 @@ function MyListingCard({listing}) {
                 <div id="location"><Icon icon="fa6-solid:map-location-dot" inline={true} style={{ verticalAlign: '-0.2em', fontSize:'22px', marginRight: '7px'}}/>{listing.city}, {listing.country} {listing.postal_code}</div>
                 <div id="per_night">per night</div>
             </div>
-            <div id="distance"><Icon icon="tabler:world" inline={true} style={{ verticalAlign: '-0.3em', fontSize:'30px', marginRight: '7px'}}/>{listing.latitude}, {listing.longitude}</div>
+            <div id="last_row">
+                <div id="distance"><Icon icon="tabler:world" inline={true} style={{ verticalAlign: '-0.3em', fontSize:'30px', marginRight: '7px'}}/>{listing.latitude}, {listing.longitude}</div>
+                <button id="delete_listing">Edit Listing</button>
+            </div>
             <div id="last_row">
                 <div id="amenities"><Icon icon="bi:card-checklist" inline={true} style={{ verticalAlign: '-0.3em', fontSize:'30px', marginRight: '7px'}}/>{listing.amenities}</div>
+                <button id="delete_listing">Delete Listing</button>
             </div>
         </div>
     )

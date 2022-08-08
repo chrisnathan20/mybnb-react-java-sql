@@ -12,6 +12,7 @@
 #last_row{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 #listing_card{
@@ -54,7 +55,7 @@
     color: 	gray; 
 }
 
-#book_button{
+#delete_listing{
     color:#D77866;
     border: none;
     border-radius: 10px;
@@ -63,4 +64,5 @@
     cursor: pointer;
     background-color: #f7ebe9;
     margin-bottom: -5px;
+    width: 15%;
 }
