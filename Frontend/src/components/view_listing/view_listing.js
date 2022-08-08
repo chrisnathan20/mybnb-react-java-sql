@@ -5,6 +5,7 @@ import Comment from "./comments/comments";
 import { Icon } from '@iconify/react';
 import './view_listing.css'
 import { useNavigate, useParams } from "react-router-dom";
+import CustomerNavbar from "../navbar/customer_navbar";
 
 function ViewListing() {
     const[listing, setListing] = useState('');
@@ -53,6 +54,8 @@ function ViewListing() {
         })
     }
   return (
+    <>
+    <CustomerNavbar/>
     <body id="view_listing_page">
         <div id="top_view_listing">
             <div id="view_listing_card">
@@ -86,6 +89,7 @@ function ViewListing() {
         </div>
         <div><Comment/></div>
     </body>
+    </>
   )
 }
 

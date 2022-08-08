@@ -2,10 +2,15 @@ import React from 'react';
 import './navbar.css'
 import {Menu, MenuItem, IconButton} from '@mui/material';
 import { Icon } from '@iconify/react';
+import { useParams } from 'react-router-dom';
 
 function CustomerNavbar() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
+    const {id} = useParams();
+    const myArray = id.split("&");
+    const url = "/explore/" + myArray[0];
+
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -22,12 +27,12 @@ function CustomerNavbar() {
         </div>
         <div id="middle_navbar">
             <div>
-                <a href="#">
+                <a href={"/explore/" + myArray[0]}>
                     <span className="redirection" id="explore">Explore</span>
                 </a>
             </div>
             <div>
-                <a href="#">
+                <a href={"/my-bookings/" + myArray[0]}>
                     <span className="redirection">My Bookings</span>
                 </a>
             </div>
