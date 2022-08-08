@@ -9,7 +9,6 @@ function CustomerNavbar() {
     const open = Boolean(anchorEl);
     const {id} = useParams();
     const myArray = id.split("&");
-    const url = "/explore/" + myArray[0];
 
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);

@@ -27,7 +27,13 @@ function login() {
         }).then(response => {
           if (response.ok) {
             response.json().then(data => {
+              console.log(data.type);
+              if (data.type == "renter") {
                 navigate('/explore/' + data.sessionId);
+              }
+              else{
+                navigate('/my-listings/' + data.sessionId);
+              }
             });
           }
           else if (response.status == 400) {

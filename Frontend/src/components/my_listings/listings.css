@@ -1,0 +1,29 @@
+#my_listings{
+    font-size: 36px;
+    font-weight: bold;
+}
+
+#my_listings_page{
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+#make_new_listing{
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #6C9C8E;
+    margin-top: 10px;
+}
+
+#my_listings_first{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
