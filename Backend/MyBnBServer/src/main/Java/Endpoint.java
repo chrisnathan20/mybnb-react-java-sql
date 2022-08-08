@@ -339,6 +339,9 @@ public class Endpoint implements HttpHandler {
         else if (path.contains("/mybnb/login")){
             this.handleLogin(r);
         }
+        else if (path.contains("/mybnb/reportA")){
+            this.handleReportA(r);
+        }
         else {
             r.sendResponseHeaders(500, -1);
             return;
@@ -443,6 +446,34 @@ public class Endpoint implements HttpHandler {
             r.sendResponseHeaders(500, -1);
             e.printStackTrace();
             return;
+        }
+    }
+    
+    public void handleReportA(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String city, start, end;
+
+            if (deserialized.has("city") && deserialized.has("start") && deserialized.has("end")) {
+                city = deserialized.getString("city");
+                start = deserialized.getString("start");
+                end = deserialized.getString("end");
+                
+                String response = this.dao.getReportA(city, start, end);
+            	r.sendResponseHeaders(200, response.length());	
+                OutputStream os = r.getResponseBody();
+                os.write(response.getBytes());
+                os.close();    
+                
+            } else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+    	} catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
         }
     }
 
