@@ -24,48 +24,9 @@ function MyBookings() {
                 "country": "Canada",
                 "start_date": "2022-12-20",
                 "end_date": "2022-12-29",
-                "total_cost": 320 
-            },
-            {
-                "username": "hostA",
-                "type": "Apartment",
-                "address": "60 Town Centre Court",
-                "city": "Scarborough",
-                "country": "Canada",
-                "start_date": "2022-12-20",
-                "end_date": "2022-12-29",
-                "total_cost": 320 
-            },
-            {
-                "username": "hostA",
-                "type": "Apartment",
-                "address": "60 Town Centre Court",
-                "city": "Scarborough",
-                "country": "Canada",
-                "start_date": "2022-12-20",
-                "end_date": "2022-12-29",
-                "total_cost": 320 
-            },
-            {
-                "username": "hostA",
-                "type": "Apartment",
-                "address": "60 Town Centre Court",
-                "city": "Scarborough",
-                "country": "Canada",
-                "start_date": "2022-12-20",
-                "end_date": "2022-12-29",
-                "total_cost": 320 
-            },
-            {
-                "username": "hostA",
-                "type": "Apartment",
-                "address": "60 Town Centre Court",
-                "city": "Scarborough",
-                "country": "Canada",
-                "start_date": "2022-12-20",
-                "end_date": "2022-12-29",
-                "total_cost": 320 
-            },
+                "total_cost": 320,
+                "booking_id": 123
+            }
         ]
         )
     }, []);
@@ -87,48 +48,9 @@ function MyBookings() {
                 "country": "Canada",
                 "start_date": "2022-12-20",
                 "end_date": "2022-12-29",
-                "total_cost": 450 
-            },
-            {
-                "username": "hostB",
-                "type": "Apartment",
-                "address": "25 Town Centre Court",
-                "city": "Scarborough",
-                "country": "Canada",
-                "start_date": "2022-12-20",
-                "end_date": "2022-12-29",
-                "total_cost": 450 
-            },
-            {
-                "username": "hostB",
-                "type": "Apartment",
-                "address": "25 Town Centre Court",
-                "city": "Scarborough",
-                "country": "Canada",
-                "start_date": "2022-12-20",
-                "end_date": "2022-12-29",
-                "total_cost": 450 
-            },
-            {
-                "username": "hostB",
-                "type": "Apartment",
-                "address": "25 Town Centre Court",
-                "city": "Scarborough",
-                "country": "Canada",
-                "start_date": "2022-12-20",
-                "end_date": "2022-12-29",
-                "total_cost": 450 
-            },
-            {
-                "username": "hostB",
-                "type": "Apartment",
-                "address": "25 Town Centre Court",
-                "city": "Scarborough",
-                "country": "Canada",
-                "start_date": "2022-12-20",
-                "end_date": "2022-12-29",
-                "total_cost": 450 
-            },
+                "total_cost": 450,
+                "booking_id": 123 
+            }
         ]
         )
     }, []);

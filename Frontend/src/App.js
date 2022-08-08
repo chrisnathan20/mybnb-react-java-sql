@@ -10,6 +10,7 @@ import Explore from './components/explore/explore';
 import ViewListing from './components/view_listing/view_listing';
 import BookingAvailable from './components/booking_available/booking_available';
 import MyBookings from './components/my_bookings/my_bookings';
+import MakeReview from './components/make_review/make_review';
 import {
   BrowserRouter as Router,
   Routes,
@@ -32,6 +33,7 @@ function App() {
           <Route path = '/explore/:id' element={<Explore/>}/>
           <Route path = '/booking-available/:id' element={<BookingAvailable/>}/>
           <Route path = '/my-bookings/:id' element={<MyBookings/>}/>
+          <Route path = '/make-review/:id' element={<MakeReview/>}/>
         </Routes>
       </Router>
     </>
