@@ -3,7 +3,7 @@ import MyListingCard from './my_listings_card';
 import { Icon } from "@iconify/react";
 import './listings.css';
 import HostNavbar from "../navbar/host_navbar";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 function MyListings() {
 
@@ -47,13 +47,19 @@ function MyListings() {
         ])*/
     }, []);
 
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/new-listing/' + id);
+    }
+
     return (
         <>
         <HostNavbar/>
         <div id="my_listings_page">
             <div id="my_listings_first">
                 <div id="my_listings">My Listings</div>
-                <button id="make_new_listing">New Listing <Icon icon="akar-icons:circle-plus-fill" inline={true} style={{ verticalAlign: '-0.2em', fontSize:'24px', marginLeft: '10px'}}/></button>
+                <button id="make_new_listing" onClick={handleClick}>New Listing <Icon icon="akar-icons:circle-plus-fill" inline={true} style={{ verticalAlign: '-0.2em', fontSize:'24px', marginLeft: '10px'}}/></button>
             </div>
             <div className="list_of_listings">
                 {listings.map((listing) => (
