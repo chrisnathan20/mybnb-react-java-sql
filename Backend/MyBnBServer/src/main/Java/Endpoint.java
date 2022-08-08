@@ -377,6 +377,9 @@ public class Endpoint implements HttpHandler {
         else if (path.contains("/mybnb/reportK")){
             this.handleReportK(r);
         } 
+        else if (path.contains("/mybnb/reportL")){
+            this.handleReportL(r);
+        } 
         else if (path.contains("/mybnb/addlisting")){
             this.handleAddListing(r);
         }
@@ -755,6 +758,21 @@ public class Endpoint implements HttpHandler {
     	try {
             
             String response = this.dao.getReportK();
+        	r.sendResponseHeaders(200, response.length());	
+            OutputStream os = r.getResponseBody();
+            os.write(response.getBytes());
+            os.close();    
+    	} catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+    }
+    
+    public void handleReportL(HttpExchange r) throws IOException {
+    	
+    	try {
+            
+            String response = this.dao.getReportL();
         	r.sendResponseHeaders(200, response.length());	
             OutputStream os = r.getResponseBody();
             os.write(response.getBytes());
