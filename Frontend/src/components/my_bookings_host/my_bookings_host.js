@@ -1,6 +1,6 @@
 import React , { useEffect, useState } from "react";
-import BookingsUpcoming from "../my_bookings/my_bookings_upcoming.js";
-import BookingsConfirmed from "../my_bookings/my_bookings_confirmed.js";
+import BookingsUpcoming from "./my_bookings_upcoming.js";
+import BookingsConfirmed from "./my_bookings_confirmed.js";
 import HostNavbar from "../navbar/host_navbar.js";
 import './my_bookings_host.css'
 import { useNavigate, useParams } from "react-router-dom";

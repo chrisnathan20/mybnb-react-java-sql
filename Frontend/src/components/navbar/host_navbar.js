@@ -2,13 +2,14 @@ import React from 'react';
 import './navbar.css'
 import {Menu, MenuItem, IconButton} from '@mui/material';
 import { Icon } from '@iconify/react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function HostNavbar() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const {id} = useParams();
     const myArray = id.split("&");
+    const navigate = useNavigate();
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -16,6 +17,25 @@ function HostNavbar() {
     const handleCloseMenu = () => {
       setAnchorEl(null);
     };
+
+    const handleLogout = () => {
+        console.log("clicked")
+        navigate("/");
+    }
+
+    const handleDelete = () => {
+        fetch('/mybnb/deleteaccount/'+myArray[0], {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            credentials: "include",
+        }).then(response => {
+            if (response.ok){
+                navigate('/')
+            }
+            else if (response.status == 400){
+            }
+        })
+    }
   return (
     <nav className="navigation">
         <div>
@@ -61,8 +81,8 @@ function HostNavbar() {
                 'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem sx={{fontSize: '15px',fontFamily: 'Poppins', color: 'black', backgroundColor: 'white', borderColor: '#d46f5e' }}><Icon icon="fluent:delete-24-filled" inline={true} style={{ verticalAlign: '-0.2em', fontSize:'23px', marginRight: '5px' }}/>Delete Account</MenuItem>
-                <MenuItem sx={{ fontSize: '15px',fontFamily: 'Poppins', color: 'black', backgroundColor: 'white', borderColor: '#d46f5e' }}><Icon icon="fe:logout" inline={true} style={{ verticalAlign: '-0.2em', fontSize:'23px', marginRight: '5px' }}/>Logout</MenuItem>
+                <MenuItem sx={{fontSize: '15px',fontFamily: 'Poppins', color: 'black', backgroundColor: 'white', borderColor: '#d46f5e' }}><Icon icon="fluent:delete-24-filled" inline={true} style={{ verticalAlign: '-0.2em', fontSize:'23px', marginRight: '5px' }}/><a onClick={handleDelete}>Delete Account</a></MenuItem>
+                <MenuItem sx={{ fontSize: '15px',fontFamily: 'Poppins', color: 'black', backgroundColor: 'white', borderColor: '#d46f5e' }}><Icon icon="fe:logout" inline={true} style={{ verticalAlign: '-0.2em', fontSize:'23px', marginRight: '5px' }}/><a onClick={handleLogout}>Logout</a></MenuItem>
             </Menu>
         </div>
   </nav>
