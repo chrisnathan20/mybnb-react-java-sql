@@ -269,4 +269,15 @@ public class MySQLdao {
     	
     	
     }
+    
+    public void cancelBooking(int id) throws SQLException {
+    	
+    	PreparedStatement execStat1=connection.prepareStatement("update listing_unavailability set initial_date = NULL, end_date = NULL where unavail_id = " + id);
+    	execStat1.execute();
+    	
+    	
+    	PreparedStatement execStat3=connection.prepareStatement("update booking set status = 'cancelled' where booking_id = " + id);
+    	execStat3.execute();    	
+    	
+    }
 }
