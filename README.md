@@ -9,6 +9,7 @@ Assumptions:
 - unable to browse unless logged in
 - only renters can book listings
 - types are restricted to just 4 (apartment, full house, private room, shared room)
+- amenities are restricted to 10 (
 
 Challenges:
 - sample data was often tweaked to provide more variety in filtering so database was often deleted and reinitialized
@@ -29,6 +30,39 @@ User Manual:
 - Start browsing through MyBnB by either signup up or logging in
 
 
+
+How to get Reports (All Requests are POST requests):
+
+Report 1: We would like to run a report and provide the total number of bookings in a specific date range by city. 
+- found by sending a request to http://localhost:8080/mybnb/reportA with body of "start" for start date, "end" for end date, "city" for city
+- note that date is in YYYY-MM-DD format
+
+Report 2: We would like to run a report and provide the total number of bookings in a specific date range by a Zip code within a city. 
+- found by sending a request to http://localhost:8080/mybnb/reportB with body of "start" for start date, "end" for end date, "city" for city
+- note that date is in YYYY-MM-DD format
+
+Report 3: We would like to run a report and provide the total number of listings per country. 
+- found by sending a request to http://localhost:8080/mybnb/reportC with body of "country" for country
+
+Report 4: We would like to run a report and provide the total number of listings per country and city. 
+- found by sending a request to http://localhost:8080/mybnb/reportD with body of "country" for country, "city" for city
+
+Report 5: We would like to run a report and provide the total number of listings per country and city, zip. 
+- found by sending a request to http://localhost:8080/mybnb/reportE with body of "country" for country, "city" for city, "postal_code" for zip
+
+Report 6: We would like to rank the hosts by the total number of listings they have overall per country 
+- found by sending a request to http://localhost:8080/mybnb/reportF with body of "country" for country
+
+Report 7: We would like to rank the hosts by the total number of listings they have overall per city 
+- found by sending a request to http://localhost:8080/mybnb/reportG with body of "city" for city
+
+Report 8: For every city and country a report should provide the hosts that have a
+number of listings that is more than 10% of the number of listings in that
+city and country. This is a query that identifies the possible commercial
+hosts, something that the system should flag and prohibit.
+- found by sending a request to http://localhost:8080/mybnb/reportH with body of "city" for city, "country" for country
+
+
 System Limitations:
 
 - Frequently crashes when adding new special price or new unavailability as a Host for their respective listing, but running refresh immediately fixes it (temporarily)
@@ -36,6 +70,8 @@ System Limitations:
 - No Input validation therefore entering NULL values or misformatted values may cause web app to crash due to failed database operations
 
 - Not all reports are fully implemented due to time constraint
+
+- No real way to update 'upcoming' listings to completed real time
 
 
 
@@ -48,3 +84,5 @@ Future Improvement:
 - Proper Input validation in forms to prevent web app crashing due to failed database operations
 
 - Full implementation of reports specified
+
+- Implement a method to update 'upcoming' listings to completed real time
