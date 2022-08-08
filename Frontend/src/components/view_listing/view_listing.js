@@ -10,8 +10,13 @@ function ViewListing() {
     const[listing, setListing] = useState('');
     const[start, setStart] = useState('');
     const[end, setEnd] = useState('');
+    const[error, setError] = useState(false);
+    
+    const navigate = useNavigate();
     const {id} = useParams(); 
+
     console.log(id);
+
     useEffect(() => {
         // this is where we should send the fetch request, sample code below
         fetch('/mybnb/getviewlisting/' + id, {
@@ -24,6 +29,29 @@ function ViewListing() {
           })
         );
     }, []);
+
+    const handleClick = (e) => {
+        e.preventDefault();
+
+        var requestbody = new Object();
+        requestbody.start_date = start;
+        requestbody.end_date = end;
+        fetch('/mybnb/attemptbooking/' + id, {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            credentials: "include",
+            body: JSON.stringify(requestbody)
+        }).then(response => {
+            if (response.ok){
+                response.json().then(data => {
+                    navigate('/booking-available/' + id + '&' + start + '&' + end + '&' + data);
+                });
+            }
+            else if (response.status == 400){
+                setError(true);
+            }
+        })
+    }
   return (
     <body id="view_listing_page">
         <div id="top_view_listing">
@@ -44,9 +72,10 @@ function ViewListing() {
 
             <div id="top_view_listing_right">
                 <form>
+                    {error && <div id="unavail_message">Listing is uvailable on those dates!</div>}
                     <input className="date_booking" type="text" placeholder="Start Date" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={start} onChange={(e) => setStart(e.target.value)}/>
                     <input className="date_booking" type="text" placeholder="End Date" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={end} onChange={(e) => setEnd(e.target.value)}/>
-                    <button type="submit" id="book_now">BOOK NOW</button>
+                    <button type="submit" id="book_now" onClick={handleClick}>BOOK NOW</button>
                 </form>
             </div>
 

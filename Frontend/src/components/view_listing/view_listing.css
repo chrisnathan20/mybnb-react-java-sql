@@ -125,3 +125,8 @@
 #view_listing_page{
     margin: 30px 150px;
 }
+
+#unavail_message{
+    color: red;
+    margin-bottom: 20px;
+}

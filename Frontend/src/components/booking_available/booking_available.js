@@ -2,12 +2,15 @@ import React , { useEffect, useState } from "react";
 import './booking_available.css'
 import { Icon } from '@iconify/react';
 import CustomerNavbar from "../navbar/customer_navbar";
+import { useParams } from "react-router-dom";
 
 function BookingAvailable({detail}) {
     const[price, setPrice] = useState(0);
     const[expiry, setExpiry] = useState('');
     const[code, setCode] = useState('');
 
+    const { id } = useParams();
+    const myArray = id.split("&");
     useEffect(() => {
         // this is where we should send the fetch request, sample code below
         /*fetch('/mybnb/getviewlisting/' + id, {
@@ -19,7 +22,7 @@ function BookingAvailable({detail}) {
             console.log(data);
           })
         );*/
-        setPrice(80.00)
+        setPrice(myArray[4]);
     }, []);
 
   return (

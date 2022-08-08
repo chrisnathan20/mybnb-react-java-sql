@@ -108,6 +108,23 @@ public class MySQLdao {
     	return response.toString();
     }
     
+    public String getUnavailability(int listing_id) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT * FROM listing_unavailability WHERE listing_id=" +
+    	listing_id);
+    	ResultSet rs = execStat.executeQuery();
+
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject unavail = new JSONObject();
+    		unavail.put("start_date", rs.getDate("initial_date"));
+    		unavail.put("end_date", rs.getDate("end_date"));
+    		response.add(unavail);
+    	}
+    	return response.toString();
+    }
+    
     public String getListings(String sortby, String address, String city, String country, String postalcode, Double latitude, Double longitude, Double minprice, Double maxprice, int distance, String start, String end) throws SQLException {
     	
     	PreparedStatement execStat;

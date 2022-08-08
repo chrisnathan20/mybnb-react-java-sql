@@ -1,5 +1,6 @@
 import React , { useEffect, useState } from "react";
 import ListingCard from './listing_card';
+import CustomerNavbar from "../navbar/customer_navbar";
 import './explore.css'
 
 function explore() {
@@ -222,6 +223,8 @@ function explore() {
 
 
     return (
+        <>
+        <CustomerNavbar/>
         <body id="explore_page">
             <div id="explore_left">
                 <form>
@@ -354,6 +357,7 @@ function explore() {
                 </ul>
             </div>
         </body>
+        </>
     )
 }
 

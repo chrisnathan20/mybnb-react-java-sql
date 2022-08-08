@@ -1,36 +1,20 @@
 import React , { useEffect, useState } from "react";
 import FutureUnavailCard from "./future_unavail_card";
-import './future_unavailabilities.css'
+import './future_unavailabilities.css';
+import { useNavigate, useParams } from "react-router-dom";
 
 function FutureUnavail() {
     const [unavail, setUnavail] = useState([]);
+    const{id} = useParams();
+    console.log("unavailbility: "+ id);
 
     useEffect(() => {
         // this is where we should send the fetch request, sample code below
-        /*fetch("http://localhost:5000/fetch-service-providers", {credentials: 'include'}).then(response =>
+        fetch("/mybnb/getunavailability/"+id, {credentials: 'include'}).then(response =>
           response.json().then(data => {
-            setAllSp(data);
+            setUnavail(data);
           })
-        );*/
-        setUnavail([
-            {
-                "start_date": "2022-04-07",
-                "end_date": "2022-05-07"
-            },
-            {
-                "start_date": "2022-04-07",
-                "end_date": "2022-05-07"
-            },
-            {
-                "start_date": "2022-04-07",
-                "end_date": "2022-05-07"
-            },
-            {
-                "start_date": "2022-04-07",
-                "end_date": "2022-05-07"
-            }
-        ]
-        )
+        );
     }, []);
 
     return (

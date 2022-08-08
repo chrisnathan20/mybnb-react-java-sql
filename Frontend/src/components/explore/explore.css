@@ -4,6 +4,7 @@
 
 #explore_page{
     display: flex;
+    margin-top: 50px;
 }
 
 #explore_left{
@@ -14,7 +15,6 @@
 #explore_right{
     width: 70%;
     padding-right: 150px;
-    padding-top: 100px;
     height: 100vh;
 }
 
