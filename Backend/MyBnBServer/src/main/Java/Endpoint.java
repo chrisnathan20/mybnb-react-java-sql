@@ -314,6 +314,9 @@ public class Endpoint implements HttpHandler {
         if (path.contains("/mybnb/getlisting")){
             this.handleGetListings(r);
         }
+        else if (path.contains("/mybnb/reportH")){
+            this.handleReportH(r);   
+        }
         else if (path.contains("/mybnb/deleteaccount")){
             this.handleDelete(r);
         }
@@ -528,6 +531,35 @@ public class Endpoint implements HttpHandler {
             return;
         }
     }
+    
+    
+    public void handleReportH(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String city, country;
+
+            if (deserialized.has("city") && deserialized.has("country")) {
+                city = deserialized.getString("city");
+                country = deserialized.getString("country");
+
+                String response = this.dao.getReportH(city, country);
+            	r.sendResponseHeaders(200, response.length());	
+                OutputStream os = r.getResponseBody();
+                os.write(response.getBytes());
+                os.close();    
+                
+            } else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+    	} catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+    }
+    
     
     public void handleReportA(HttpExchange r) throws IOException {
     	String body = Utils.convert(r.getRequestBody());
