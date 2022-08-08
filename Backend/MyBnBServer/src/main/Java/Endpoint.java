@@ -342,6 +342,22 @@ public class Endpoint implements HttpHandler {
             this.handleReportA(r);
             
         }
+        else if (path.contains("/mybnb/reportB")){
+            this.handleReportB(r);
+            
+        }
+        else if (path.contains("/mybnb/reportC")){
+            this.handleReportC(r);
+            
+        }
+        else if (path.contains("/mybnb/reportD")){
+            this.handleReportD(r);
+            
+        }
+        else if (path.contains("/mybnb/reportE")){
+            this.handleReportE(r);
+            
+        }
         else if (path.contains("/mybnb/addlisting")){
             this.handleAddListing(r);
         }
@@ -550,7 +566,87 @@ public class Endpoint implements HttpHandler {
             r.sendResponseHeaders(500, -1);
         }
     }
+    
+    public void handleReportC(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String country;
 
+            if (deserialized.has("country")) {
+                country = deserialized.getString("country");
+                
+                String response = this.dao.getReportC(country);
+            	r.sendResponseHeaders(200, response.length());	
+                OutputStream os = r.getResponseBody();
+                os.write(response.getBytes());
+                os.close();    
+                
+            } else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+    	} catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+    }
+    
+    public void handleReportD(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String country, city;
+
+            if (deserialized.has("country") && deserialized.has("city")) {
+                country = deserialized.getString("country");
+                city = deserialized.getString("city");
+                
+                String response = this.dao.getReportD(country, city);
+            	r.sendResponseHeaders(200, response.length());	
+                OutputStream os = r.getResponseBody();
+                os.write(response.getBytes());
+                os.close();    
+                
+            } else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+    	} catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+    }
+    
+    public void handleReportE(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String country, city, postal_code;
+
+            if (deserialized.has("country") && deserialized.has("city") && deserialized.has("postal_code")) {
+                country = deserialized.getString("country");
+                city = deserialized.getString("city");
+                postal_code = deserialized.getString("postal_code")
+                
+                String response = this.dao.getReportE(country, city);
+            	r.sendResponseHeaders(200, response.length());	
+                OutputStream os = r.getResponseBody();
+                os.write(response.getBytes());
+                os.close();    
+                
+            } else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+    	} catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+    }
     public void handleCancelBooking(HttpExchange r) throws IOException {
     	String body = Utils.convert(r.getRequestBody());
     	
