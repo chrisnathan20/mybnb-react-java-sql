@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './new_listing.css'
 import svg from '../../assets/house_searching.svg'
-import { useNavigate } from 'react-router-dom';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -9,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 function NewListing() {
     const navigate = useNavigate();
@@ -24,6 +24,7 @@ function NewListing() {
     const [type, setType] = useState('');
 
 
+    const {id} = useParams(); 
     // handling clicking save changes button
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,20 +34,24 @@ function NewListing() {
         requestbody.country = country;
         requestbody.city = city;
         requestbody.postal_code = postalCode;
+        requestbody.longitude = longitude;
+        requestbody.latitude = latitude;
+        requestbody.basePrice = basePrice;
+        requestbody.type = type;
+        requestbody.amenities = amenitiesChosen.toString();
 
-        /*fetch('mybnb/register', {
+        console.log(amenitiesChosen);
+
+        fetch('/mybnb/addlisting/' + id, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             credentials: "include",
             body: JSON.stringify(requestbody)
         }).then(response => {
             if (response.ok){
-                navigate('/login')
+                navigate('/my-listings/' + id);
             }
-            else if (response.status == 400){
-                setError(true);
-            }
-        })*/
+        })
 
     }
     

@@ -538,4 +538,29 @@ public class MySQLdao {
     	PreparedStatement execStat1=connection.prepareStatement("update user set password = NULL where username = \"" + username + "\"");
     	execStat1.execute();
     }
+    
+    
+    public void addListing(String username, Double longitude, Double latitude, Double basePrice, String address, String country, String city, String postalcode, String type, String [] arr_am) throws SQLException {
+    	PreparedStatement execStat3=connection.prepareStatement("insert into listing(longitude, latitude, address, country, city, postal_code, base_price) values (" + longitude + "," + latitude + ", '" + address + "', '" + country + "', '" + city + "', '" + postalcode + "'," + basePrice + ")");
+    	execStat3.execute();
+    	
+    	PreparedStatement execStat2=connection.prepareStatement("select * from mybnb.listing order by listing_id DESC;");
+    	ResultSet rs = execStat2.executeQuery();
+    	
+    	rs.next();
+    	
+    	int id = rs.getInt("listing_id");
+    
+    	PreparedStatement execStat=connection.prepareStatement("insert into host_listing(username, listing_id) values('" + username + "', " + id + ");");
+    	execStat.execute();
+    	
+    	execStat=connection.prepareStatement("insert into listing_type(listing_id, type_name) values(" + id + ", '" + type + "');");
+    	execStat.execute();
+    	
+    	for(String amenity: arr_am) {
+    		execStat=connection.prepareStatement("insert into listing_amenity(listing_id, amenity_name) values(" + id + ", '" + amenity + "');");
+        	execStat.execute();
+    	}
+    
+    }
 }

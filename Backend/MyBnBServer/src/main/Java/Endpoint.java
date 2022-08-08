@@ -277,7 +277,6 @@ public class Endpoint implements HttpHandler {
         System.out.println(method + " method for the path " + path);
         
         
-        
         if (path.contains("/mybnb/getlisting")){
             this.handleGetListings(r);
         }
@@ -305,9 +304,55 @@ public class Endpoint implements HttpHandler {
         else if (path.contains("/mybnb/login")){
             this.handleLogin(r);
         }
+        else if (path.contains("/mybnb/addlisting")){
+            this.handleAddListing(r);
+        }
         else {
             r.sendResponseHeaders(500, -1);
             return;
+        }
+    }
+    
+    public void handleAddListing(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            Double longitude, latitude, basePrice;
+            String address, country, city, postalcode, type, amenitiesChosen;
+            
+            longitude = deserialized.getDouble("longitude");
+            latitude = deserialized.getDouble("latitude");
+            basePrice = deserialized.getDouble("basePrice");
+            
+            address = deserialized.getString("address");
+            country = deserialized.getString("country");
+            city = deserialized.getString("city");
+            postalcode = deserialized.getString("postal_code");
+            type = deserialized.getString("type");
+            amenitiesChosen = deserialized.getString("amenities");
+                        
+            String[] arr_am = amenitiesChosen.split(",");
+
+
+            try {
+            	String path = r.getRequestURI().toString();
+            	String[] arrOfStr = path.split("&");
+            	System.out.println(Integer.parseInt(arrOfStr[0].split("/")[3]));
+                String username = sessionUsername.get(Integer.parseInt(arrOfStr[0].split("/")[3]));
+                
+                this.dao.addListing(username, longitude, latitude, basePrice, address, country, city, postalcode, type, arr_am);
+                
+                r.sendResponseHeaders(200, -1);
+                
+            } catch (Exception e) {
+                r.sendResponseHeaders(500, -1);
+                e.printStackTrace();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
         }
     }
     

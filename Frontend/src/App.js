@@ -43,7 +43,7 @@ function App() {
           <Route path = '/make-review/:id' element={<MakeReview/>}/>
           <Route path = '/my-listings/:id' element={<MyListings/>}/>
           <Route path = '/my-bookings-host/:id' element={<MyBookingsHost/>}/>
-          <Route path = '/new-listing' element={<NewListing/>}/>
+          <Route path = '/new-listing/:id' element={<NewListing/>}/>
           <Route path = '/make-review-host/:id' element={<MakeReviewHost/>}/>
           <Route path = '/edit-listing/:id' element={<EditListing/>}/>
         </Routes>
