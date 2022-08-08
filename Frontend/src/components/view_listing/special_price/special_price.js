@@ -1,35 +1,20 @@
 import React , { useEffect, useState } from "react";
 import SpecialPriceCard from './special_price_card';
+import { useParams } from "react-router-dom";
 import './special_price.css'
 
 function SpecialPrice() {
     const [prices, setPrices] = useState([]);
+    const{id} = useParams();
 
     useEffect(() => {
         // this is where we should send the fetch request, sample code below
-        /*fetch("http://localhost:5000/fetch-service-providers", {credentials: 'include'}).then(response =>
+        fetch("/mybnb/getspecialprices/"+id, {credentials: 'include'}).then(response =>
           response.json().then(data => {
-            setAllSp(data);
+            setPrices(data);
+            console.log(data);
           })
-        );*/
-        setPrices([
-            {
-                "price": 80.00,
-                "start_date": "2022-04-07",
-                "end_date": "2022-05-07"
-            },
-            {
-                "price": 80.00,
-                "start_date": "2022-04-07",
-                "end_date": "2022-05-07"
-            },
-            {
-                "price": 80.00,
-                "start_date": "2022-04-07",
-                "end_date": "2022-05-07"
-            },
-        ]
-        )
+        );
     }, []);
 
     return (
