@@ -13,6 +13,7 @@ function FutureUnavail() {
         fetch("/mybnb/getunavailability/"+id, {credentials: 'include'}).then(response =>
           response.json().then(data => {
             setUnavail(data);
+            console.log(data);
           })
         );
     }, []);

@@ -52,6 +52,9 @@ public class Endpoint implements HttpHandler {
         else if (path.contains("/mybnb/getunavailability")){
         	this.handleGetUnavailability(r);
         }
+        else if (path.contains("/mybnb/getspecialprices")){
+        	this.handleGetSpecialPrices(r);
+        }
         else {
             r.sendResponseHeaders(500, -1);
             return;
@@ -137,6 +140,24 @@ public class Endpoint implements HttpHandler {
         System.out.println(arrOfStr[1]);
         try {
             String response = this.dao.getUnavailability(Integer.parseInt(arrOfStr[1]));
+        	r.sendResponseHeaders(200, response.length());	
+            OutputStream os = r.getResponseBody();
+            os.write(response.getBytes());
+            os.close();    
+        } catch (Exception e) {
+            r.sendResponseHeaders(500, -1);
+            e.printStackTrace();
+            return;
+        }
+    }
+    
+    public void handleGetSpecialPrices(HttpExchange r) throws IOException {
+    	String path = r.getRequestURI().toString();
+    	String[] arrOfStr = path.split("&");
+    	System.out.println(path);
+        System.out.println(arrOfStr[1]);
+        try {
+            String response = this.dao.getSpecialPrices(Integer.parseInt(arrOfStr[1]));
         	r.sendResponseHeaders(200, response.length());	
             OutputStream os = r.getResponseBody();
             os.write(response.getBytes());

@@ -111,7 +111,7 @@ public class MySQLdao {
     public String getUnavailability(int listing_id) throws SQLException {
     	
     	PreparedStatement execStat=connection.prepareStatement("SELECT * FROM listing_unavailability WHERE listing_id=" +
-    	listing_id);
+    	listing_id + " AND initial_date IS NOT NULL");
     	ResultSet rs = execStat.executeQuery();
 
     	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
@@ -121,6 +121,25 @@ public class MySQLdao {
     		unavail.put("start_date", rs.getDate("initial_date"));
     		unavail.put("end_date", rs.getDate("end_date"));
     		response.add(unavail);
+    	}
+    	return response.toString();
+    }
+    
+    public String getSpecialPrices(int listing_id) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT * FROM special_prices WHERE listing_id=" +
+    	listing_id + " AND initial_date IS NOT NULL");
+    	ResultSet rs = execStat.executeQuery();
+
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject special = new JSONObject();
+    		special.put("start_date", rs.getDate("initial_date"));
+    		special.put("end_date", rs.getDate("end_date"));
+    		special.put("price", rs.getDouble("price"));
+    		
+    		response.add(special);
     	}
     	return response.toString();
     }

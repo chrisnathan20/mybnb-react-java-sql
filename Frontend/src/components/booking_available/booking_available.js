@@ -2,12 +2,13 @@ import React , { useEffect, useState } from "react";
 import './booking_available.css'
 import { Icon } from '@iconify/react';
 import CustomerNavbar from "../navbar/customer_navbar";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function BookingAvailable({detail}) {
     const[price, setPrice] = useState(0);
     const[expiry, setExpiry] = useState('');
     const[code, setCode] = useState('');
+    const navigate = useNavigate();
 
     const { id } = useParams();
     const myArray = id.split("&");
@@ -25,6 +26,21 @@ function BookingAvailable({detail}) {
         setPrice(myArray[4]);
     }, []);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        fetch('/mybnb/booking/' + id, {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            credentials: "include",
+        }).then(response => {
+            if (response.ok){
+                navigate('/explore/' + myArray[0]);
+            }
+            else if (response.status == 400){
+            }
+        })
+    }
   return (
     <>
     <CustomerNavbar/>
@@ -35,7 +51,7 @@ function BookingAvailable({detail}) {
         <form>
             <div><input className='ccinfo' type="text" placeholder="Expiry Date" value={expiry} onChange={(e) => setExpiry(e.target.value)}/></div>
             <div><input className='ccinfo' type="text" placeholder="CVC Code" value={code} onChange={(e) => setCode(e.target.value)}/></div>
-            <div id="confirmation"><button type="submit" id="confirm_button">Confirm</button></div>
+            <div id="confirmation" onClick={handleSubmit}><button type="submit" id="confirm_button">Confirm</button></div>
         </form>
     </div>
     </>
