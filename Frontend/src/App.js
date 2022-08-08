@@ -14,12 +14,16 @@ import MakeReview from './components/make_review/make_review';
 import MyListings from './components/my_listings/listings';
 import MyBookingsHost from './components/my_bookings_host/my_bookings_host';
 import NewListing from './components/new_listing/new_listing';
+import MakeReviewHost from './components/make_review_host/make_review_host';
+import EditListing from './components/edit_listing/edit_listing';
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link
 } from "react-router-dom";
+
 
 function App() {
   return (
@@ -40,6 +44,8 @@ function App() {
           <Route path = '/my-listings/:id' element={<MyListings/>}/>
           <Route path = '/my-bookings-host/:id' element={<MyBookingsHost/>}/>
           <Route path = '/new-listing' element={<NewListing/>}/>
+          <Route path = '/make-review-host/:id' element={<MakeReviewHost/>}/>
+          <Route path = '/edit-listing/:id' element={<EditListing/>}/>
         </Routes>
       </Router>
     </>

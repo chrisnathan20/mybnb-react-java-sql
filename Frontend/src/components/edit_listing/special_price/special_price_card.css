@@ -1,0 +1,33 @@
+#data_price{
+    color: #D77866;
+    font-size: 36px;
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+#per_night_special{
+    color: gray;
+}
+
+#special_price_card{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20px 30px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+#start_date{
+    font-weight: 600;
+}
+
+#end_date{
+    font-weight: 600;
+}
+
+.dates{
+    color: #6C9C8E
+}
