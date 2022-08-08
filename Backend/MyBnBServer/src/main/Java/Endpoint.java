@@ -49,11 +49,20 @@ public class Endpoint implements HttpHandler {
         if (path.contains("/mybnb/getviewlisting")){
             this.handleGetViewListings(r);
         }
+        else if (path.contains("/mybnb/getListingHost")){
+            this.handleGetListingHost(r);
+        }
         else if (path.contains("/mybnb/getRenterUpcomingListing")){
             this.handleGetRenterUpcomingListings(r);
         }
         else if (path.contains("/mybnb/getRenterCompletedListing")){
             this.handleGetRenterCompletedListings(r);
+        }
+        else if (path.contains("/mybnb/getHostUpcomingListing")){
+            this.handleGetHostUpcomingListings(r);
+        }
+        else if (path.contains("/mybnb/getHostCompletedListing")){
+            this.handleGetHostCompletedListings(r);
         }
         else if (path.contains("/mybnb/getunavailability")){
         	this.handleGetUnavailability(r);
@@ -138,12 +147,63 @@ public class Endpoint implements HttpHandler {
         }
     }
     
+    public void handleGetHostUpcomingListings(HttpExchange r) throws IOException {
+    	String path = r.getRequestURI().toString();
+    	String[] arrOfStr = path.split("&");
+        String username = sessionUsername.get(Integer.parseInt(arrOfStr[0].split("/")[3]));
+        try {
+            String response = this.dao.getHostUpcomingListings(username);
+        	r.sendResponseHeaders(200, response.length());	
+            OutputStream os = r.getResponseBody();
+            os.write(response.getBytes());
+            os.close();    
+        } catch (Exception e) {
+            r.sendResponseHeaders(500, -1);
+            e.printStackTrace();
+            return;
+        }
+    }
+    
+    public void handleGetListingHost(HttpExchange r) throws IOException {
+    	String path = r.getRequestURI().toString();
+    	String[] arrOfStr = path.split("&");
+        String username = sessionUsername.get(Integer.parseInt(arrOfStr[0].split("/")[3]));
+        try {
+            String response = this.dao.getListingsHost(username);
+        	r.sendResponseHeaders(200, response.length());	
+            OutputStream os = r.getResponseBody();
+            os.write(response.getBytes());
+            os.close();    
+        } catch (Exception e) {
+            r.sendResponseHeaders(500, -1);
+            e.printStackTrace();
+            return;
+        }
+    }
+    
     public void handleGetRenterCompletedListings(HttpExchange r) throws IOException {
     	String path = r.getRequestURI().toString();
     	String[] arrOfStr = path.split("&");
         String username = sessionUsername.get(Integer.parseInt(arrOfStr[0].split("/")[3]));
         try {
             String response = this.dao.getRenterCompletedListings(username);
+        	r.sendResponseHeaders(200, response.length());	
+            OutputStream os = r.getResponseBody();
+            os.write(response.getBytes());
+            os.close();    
+        } catch (Exception e) {
+            r.sendResponseHeaders(500, -1);
+            e.printStackTrace();
+            return;
+        }
+    }
+    
+    public void handleGetHostCompletedListings(HttpExchange r) throws IOException {
+    	String path = r.getRequestURI().toString();
+    	String[] arrOfStr = path.split("&");
+        String username = sessionUsername.get(Integer.parseInt(arrOfStr[0].split("/")[3]));
+        try {
+            String response = this.dao.getHostCompletedListings(username);
         	r.sendResponseHeaders(200, response.length());	
             OutputStream os = r.getResponseBody();
             os.write(response.getBytes());

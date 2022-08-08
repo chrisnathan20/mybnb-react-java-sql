@@ -3,18 +3,20 @@ import BookingsUpcoming from "../my_bookings/my_bookings_upcoming.js";
 import BookingsConfirmed from "../my_bookings/my_bookings_confirmed.js";
 import HostNavbar from "../navbar/host_navbar.js";
 import './my_bookings_host.css'
+import { useNavigate, useParams } from "react-router-dom";
 
 function MyBookingsHost() {
     const[upcoming, setUpcoming] = useState([]);
     const[confirmed, setConfirmed] = useState([]);
+    const {id} = useParams(); 
     useEffect(() => {
         // this is where we should send the fetch request, sample code below
-        /*fetch("/mybnb/getunavailability/"+id, {credentials: 'include'}).then(response =>
+        fetch("/mybnb/getHostUpcomingListing/"+id, {credentials: 'include'}).then(response =>
           response.json().then(data => {
-            setUnavail(data);
+            setUpcoming(data);
             console.log(data);
           })
-        );*/
+        );/*
         setUpcoming([
             {
                 "username": "renterA",
@@ -28,17 +30,17 @@ function MyBookingsHost() {
                 "booking_id": 123
             }
         ]
-        )
+        )*/
     }, []);
 
     useEffect(() => {
         // this is where we should send the fetch request, sample code below
-        /*fetch("/mybnb/getunavailability/"+id, {credentials: 'include'}).then(response =>
+        fetch("/mybnb/getHostCompletedListing/"+id, {credentials: 'include'}).then(response =>
           response.json().then(data => {
-            setUnavail(data);
+            setConfirmed(data);
             console.log(data);
           })
-        );*/
+        );/*
         setConfirmed([
             {
                 "username": "renterB",
@@ -52,7 +54,7 @@ function MyBookingsHost() {
                 "booking_id": 123 
             }
         ]
-        )
+        )*/
     }, []);
 
     return (
@@ -68,7 +70,7 @@ function MyBookingsHost() {
                 </div>
             </div>
             <div className="bookings">
-                <div className="bookings_header">Confirmed Bookings</div>
+                <div className="bookings_header">Completed Bookings</div>
                 <div className="list_of_bookings">
                     {confirmed.map((appt) => (
                             <BookingsConfirmed booking={appt} />

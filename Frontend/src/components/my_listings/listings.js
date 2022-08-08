@@ -3,21 +3,23 @@ import MyListingCard from './my_listings_card';
 import { Icon } from "@iconify/react";
 import './listings.css';
 import HostNavbar from "../navbar/host_navbar";
+import { useNavigate, useParams } from "react-router-dom";
 
 function MyListings() {
+
+    const {id} = useParams(); 
+
     const[listings, setListings] = useState([]);
     useEffect(() => {
-        /*fetch('/mybnb/getlisting', {
-            method: 'POST',
+        fetch('/mybnb/getListingHost/' + id, {
             headers: {"Content-Type": "application/json"},
             credentials: "include",
-            body: JSON.stringify(requestbody)
         }).then(response =>
           response.json().then(data => {
             setListings(data);
             console.log(data);
           })
-        );*/
+        );/*
         setListings([
             {
                 "type": "Apartment",
@@ -42,7 +44,7 @@ function MyListings() {
                 "amenities": "Wifi, First-aid kit, Gym Access"
             }
 
-        ])
+        ])*/
     }, []);
 
     return (

@@ -233,6 +233,66 @@ public class MySQLdao {
     	return response.toString();
     }
     
+    public String getListingsHost(String username) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT * from mybnb.listing INNER JOIN host_listing ON listing.listing_id=host_listing.listing_id where host_listing.username = '" + username + "'");
+    	ResultSet rs = execStat.executeQuery();
+    	
+    	
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while (rs.next()) {
+    		
+        	JSONObject listing = new JSONObject();
+            listing.put("listingId", rs.getInt("listing_id"));
+            
+            PreparedStatement execType=connection.prepareStatement("select * from mybnb.listing_type where listing_id = " + rs.getInt("listing_id"));
+        	ResultSet rsType = execType.executeQuery();
+        	rsType.next();
+        	listing.put("type", rsType.getString("type_name"));
+        	
+        	PreparedStatement execam=connection.prepareStatement("select * from mybnb.listing_amenity where listing_id = " + rs.getInt("listing_id"));
+        	ResultSet rsam = execam.executeQuery();
+        	
+        	String amenity = "";
+        	ArrayList<String> amenity_list = new ArrayList<String>();
+        	
+        	if(rsam.next()) {
+        		amenity = amenity + rsam.getString("amenity_name");
+        		amenity_list.add(rsam.getString("amenity_name"));
+        	}
+        	
+        	if(rsam.next()) {
+        		amenity = amenity  + ", " + rsam.getString("amenity_name");
+        		amenity_list.add(rsam.getString("amenity_name"));
+        	}
+        	
+        	if(rsam.next()) {
+        		amenity = amenity  + ", " + rsam.getString("amenity_name") + " and more";
+        		amenity_list.add(rsam.getString("amenity_name"));
+        	}
+        	
+        	while(rsam.next()) {
+        		amenity_list.add(rsam.getString("amenity_name"));
+        	}
+        	
+        	listing.put("type", rsType.getString("type_name"));
+        	listing.put("amenities", amenity);
+        	listing.put("am_list", amenity_list.toString());
+            
+    		listing.put("longitude", rs.getDouble("longitude"));
+    		listing.put("latitude", rs.getDouble("latitude"));
+    		listing.put("address", rs.getString("address"));
+    		listing.put("country", rs.getString("country"));
+    		listing.put("city", rs.getString("city"));
+    		listing.put("postal_code", rs.getString("postal_code"));
+    		listing.put("price", rs.getDouble("base_price"));
+    		
+	    	response.add(listing);
+    	}
+    	return response.toString();
+    }
+    
     public boolean isAvailable(int id, String start, String end) throws SQLException {
     	PreparedStatement execStat1=connection.prepareStatement("select * from mybnb.listing_unavailability where listing_id ="+ id +" and '"+ start +"' between initial_date and end_date");
     	ResultSet rs1 = execStat1.executeQuery();
@@ -376,6 +436,35 @@ public class MySQLdao {
     	return response.toString();
     }
     
+    public String getHostUpcomingListings(String username) throws SQLException {
+    	PreparedStatement execStat2=connection.prepareStatement("SELECT booking_renter.username, booking.booking_id, booking.total_cost, listing_unavailability.initial_date, listing_unavailability.end_date, listing.address, listing.city, listing.country, listing_type.type_name FROM booking"
+    			+ " INNER JOIN booking_renter ON booking.booking_id=booking_renter.booking_id"
+    			+ " INNER JOIN listing_unavailability ON booking.booking_id=listing_unavailability.unavail_id"
+    			+ " INNER JOIN listing ON listing.listing_id=listing_unavailability.listing_id"
+    			+ " INNER JOIN listing_type ON listing.listing_id=listing_type.listing_id"
+    			+ " INNER JOIN host_listing ON listing.listing_id=host_listing.listing_id"
+    			+ " WHERE host_listing.username = '" + username + "' and booking.status = 'upcoming';");
+    	ResultSet rs = execStat2.executeQuery();
+    	
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject res = new JSONObject();
+    		res.put("username", rs.getString("username"));
+    		res.put("type", rs.getString("type_name"));
+    		res.put("address", rs.getString("address"));
+    		res.put("city", rs.getString("city"));
+    		res.put("country", rs.getString("country"));
+    		res.put("start_date", rs.getDate("initial_date"));
+    		res.put("end_date", rs.getDate("end_date"));
+    		res.put("total_cost", rs.getDouble("total_cost"));
+    		res.put("booking_id", rs.getDouble("booking_id"));
+    		response.add(res);
+    	}
+    	
+    	return response.toString();
+    }
+    
     public String getRenterCompletedListings(String username) throws SQLException {
     	PreparedStatement execStat2=connection.prepareStatement("SELECT host_listing.username, booking.booking_id, booking.total_cost, listing_unavailability.initial_date, listing_unavailability.end_date, listing.address, listing.city, listing.country, listing_type.type_name FROM booking"
     			+ " INNER JOIN booking_renter ON booking.booking_id=booking_renter.booking_id"
@@ -384,6 +473,35 @@ public class MySQLdao {
     			+ " INNER JOIN listing_type ON listing.listing_id=listing_type.listing_id"
     			+ " INNER JOIN host_listing ON listing.listing_id=host_listing.listing_id"
     			+ " WHERE booking_renter.username = '" + username + "' and booking.status = 'completed';");
+    	ResultSet rs = execStat2.executeQuery();
+
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject res = new JSONObject();
+    		res.put("username", rs.getString("username"));
+    		res.put("type", rs.getString("type_name"));
+    		res.put("address", rs.getString("address"));
+    		res.put("city", rs.getString("city"));
+    		res.put("country", rs.getString("country"));
+    		res.put("start_date", rs.getDate("initial_date"));
+    		res.put("end_date", rs.getDate("end_date"));
+    		res.put("total_cost", rs.getDouble("total_cost"));
+    		res.put("booking_id", rs.getDouble("booking_id"));
+    		response.add(res);
+    	}
+    	
+    	return response.toString();
+    }
+    
+    public String getHostCompletedListings(String username) throws SQLException {
+    	PreparedStatement execStat2=connection.prepareStatement("SELECT booking_renter.username, booking.booking_id, booking.total_cost, listing_unavailability.initial_date, listing_unavailability.end_date, listing.address, listing.city, listing.country, listing_type.type_name FROM booking"
+    			+ " INNER JOIN booking_renter ON booking.booking_id=booking_renter.booking_id"
+    			+ " INNER JOIN listing_unavailability ON booking.booking_id=listing_unavailability.unavail_id"
+    			+ " INNER JOIN listing ON listing.listing_id=listing_unavailability.listing_id"
+    			+ " INNER JOIN listing_type ON listing.listing_id=listing_type.listing_id"
+    			+ " INNER JOIN host_listing ON listing.listing_id=host_listing.listing_id"
+    			+ " WHERE host_listing.username = '" + username + "' and booking.status = 'completed';");
     	ResultSet rs = execStat2.executeQuery();
 
     	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
