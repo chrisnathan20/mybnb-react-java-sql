@@ -216,8 +216,13 @@ public class Endpoint implements HttpHandler {
         // Confirmation to terminal/console if http request is received by server
         System.out.println(method + " method for the path " + path);
         
+        
+        
         if (path.contains("/mybnb/getlisting")){
             this.handleGetListings(r);
+        }
+        else if (path.contains("/mybnb/deleteaccount")){
+            this.handleDelete(r);
         }
         else if (path.contains("/mybnb/cancelbooking")){
             this.handleCancelBooking(r);
@@ -284,6 +289,25 @@ public class Endpoint implements HttpHandler {
         }
     }
     
+    
+    public void handleDelete(HttpExchange r) throws IOException {
+        try {
+        	String path = r.getRequestURI().toString();
+        	String[] arrOfStr = path.split("&");
+        	System.out.println(Integer.parseInt(arrOfStr[0].split("/")[3]));
+            String username = sessionUsername.get(Integer.parseInt(arrOfStr[0].split("/")[3]));
+            
+            this.dao.deleteUser(username);
+
+            r.sendResponseHeaders(200, -1);
+            
+        } catch (Exception e) {
+            r.sendResponseHeaders(500, -1);
+            e.printStackTrace();
+            return;
+        }
+    }
+
     public void handleCancelBooking(HttpExchange r) throws IOException {
     	String body = Utils.convert(r.getRequestBody());
     	
