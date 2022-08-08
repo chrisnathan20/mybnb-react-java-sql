@@ -5,7 +5,7 @@ It is implemented using React as its frontend, Java as its backend and MySQL as 
 
 
 Assumptions:
-- fixed base price for listings but editable special prices
+- fixed base price for listings but editable special prices, this decision is to satisfy the condition that the price change can only change on days that the listing is available
 - unable to browse unless logged in
 - only renters can book listings
 - types are restricted to just 4 (apartment, full house, private room, shared room)
