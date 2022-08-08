@@ -299,4 +299,13 @@ public class MySQLdao {
     	execStat3.execute();    	
     	
     }
+    
+    public boolean isRenter(String username) throws SQLException {
+    	
+    	PreparedStatement execStat2=connection.prepareStatement("select * from mybnb.renter where username = '" + username + "'");
+    	ResultSet rs = execStat2.executeQuery();
+    	
+    	return rs.next(); 	
+    	
+    }
 }

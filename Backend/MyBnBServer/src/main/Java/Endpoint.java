@@ -257,6 +257,13 @@ public class Endpoint implements HttpHandler {
                 	JSONObject response = new JSONObject();
                     response.put("sessionId", session);
                     
+                    if(this.dao.isRenter(username)) {
+                    	response.put("type", "renter");
+                    }
+                    else {
+                    	response.put("type", "host");
+                    }
+                    
                     String responseString = response.toString();
                     r.sendResponseHeaders(200, responseString.length());	
                     OutputStream os = r.getResponseBody();
