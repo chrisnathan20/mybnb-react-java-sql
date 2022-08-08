@@ -344,4 +344,7 @@ insert into Comment(title, content, rating, forUsername, fromUsername) values('F
 insert into booking_comment(booking_id, comment_id) values(4, 1);
 
 insert into Comment(title, content, rating, forUsername, fromUsername) values('Second Time Staying Here, Even Better!', 'It was still very cozy, comfortable. The Host was very welcoming and I would definitely would love to return to this comfortable spot', 5, 'hostA', 'renterA');
-insert into booking_comment(booking_id, comment_id) values(3, 1);
+insert into booking_comment(booking_id, comment_id) values(3, 2);
+
+insert into Comment(title, content, rating, forUsername, fromUsername) values('Very Welcomed to come again', 'Very nice person and welcomed Guest to my listing anytime again', 5, 'renterA', 'hostA');
+insert into booking_comment(booking_id, comment_id) values(3, 3);
