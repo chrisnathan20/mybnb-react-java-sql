@@ -39,7 +39,7 @@ function HostNavbar() {
   return (
     <nav className="navigation">
         <div>
-            <a href="#">
+            <a href="/">
                 <span className="redirection" id="home_logo"><span id="my">My</span><span id="bnb">BnB</span></span>
             </a>
         </div>
@@ -55,7 +55,7 @@ function HostNavbar() {
                 </a>
             </div>
             <div>
-                <a href="#">
+                <a href={"/host-toolkit/" + myArray[0]}>
                     <span className="redirection">Host Toolkit</span>
                 </a>
             </div>

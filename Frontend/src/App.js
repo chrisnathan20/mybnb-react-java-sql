@@ -16,6 +16,7 @@ import MyBookingsHost from './components/my_bookings_host/my_bookings_host';
 import NewListing from './components/new_listing/new_listing';
 import MakeReviewHost from './components/make_review_host/make_review_host';
 import EditListing from './components/edit_listing/edit_listing';
+import HostToolkit from './components/host_toolkit/host_toolkit';
 
 import {
   BrowserRouter as Router,
@@ -46,6 +47,7 @@ function App() {
           <Route path = '/new-listing/:id' element={<NewListing/>}/>
           <Route path = '/make-review-host/:id' element={<MakeReviewHost/>}/>
           <Route path = '/edit-listing/:id' element={<EditListing/>}/>
+          <Route path = '/host-toolkit/:id' element={<HostToolkit/>}/>
         </Routes>
       </Router>
     </>

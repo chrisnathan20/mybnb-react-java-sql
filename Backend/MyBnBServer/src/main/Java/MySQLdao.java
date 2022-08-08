@@ -144,6 +144,48 @@ public class MySQLdao {
     	return response.toString();
     }
     
+    public String getTopAmenities() throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT amenity_name, count(*) AS count \r\n"
+    			+ "FROM listing_amenity\r\n"
+    			+ "GROUP BY amenity_name\r\n"
+    			+ "ORDER BY count(*) DESC\r\n"
+    			+ "LIMIT 3;");
+    	ResultSet rs = execStat.executeQuery();
+
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject amenities = new JSONObject();
+    		amenities.put("name", rs.getString("amenity_name"));
+    		amenities.put("count", rs.getInt("count"));
+
+    		response.add(amenities);
+    	}
+    	return response.toString();
+    }
+    
+    public String getLowestAmenities() throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT amenity_name, count(*) AS count \r\n"
+    			+ "FROM listing_amenity\r\n"
+    			+ "GROUP BY amenity_name\r\n"
+    			+ "ORDER BY count(*) ASC\r\n"
+    			+ "LIMIT 3;");
+    	ResultSet rs = execStat.executeQuery();
+
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject amenities = new JSONObject();
+    		amenities.put("name", rs.getString("amenity_name"));
+    		amenities.put("count", rs.getInt("count"));
+
+    		response.add(amenities);
+    	}
+    	return response.toString();
+    }
+    
     public String getListings(String sortby, String address, String city, String country, String postalcode, Double latitude, Double longitude, Double minprice, Double maxprice, int distance, String start, String end) throws SQLException {
     	
     	PreparedStatement execStat;
