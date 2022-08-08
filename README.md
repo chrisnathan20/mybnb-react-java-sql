@@ -10,6 +10,11 @@ Assumptions:
 - only renters can book listings
 - types are restricted to just 4 (apartment, full house, private room, shared room)
 
+Challenges:
+- sample data was often tweaked to provide more variety in filtering so database was often deleted and reinitialized
+- initially attempted to use Spring Boot however due to time constraint and lack of technical knowledge, we opted to using a HttpServer in Java after 2-3 days attempting of learning Spring Boot
+- connecting react requests to the Java HttpServer Endpoints for the first time
+
 
 User Manual:
 
