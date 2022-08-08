@@ -10,6 +10,7 @@ function EditListing() {
     const[listing, setListing] = useState('');
     const[start, setStart] = useState('');
     const[end, setEnd] = useState('');
+    const[price, setPrice] = useState('');
     const[error, setError] = useState(false);
     
     const navigate = useNavigate();
@@ -47,12 +48,27 @@ function EditListing() {
             <div id="special_prices_view"><SpecialPrice/></div>
             <div id="future_unavail_view"><FutureUnavail/></div>
         </div>
-        <div>
-        <form>
-                    <input className="date_booking" type="text" placeholder="Start Date" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={start} onChange={(e) => setStart(e.target.value)}/>
-                    <input className="date_booking" type="text" placeholder="End Date" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={end} onChange={(e) => setEnd(e.target.value)}/>
-                    <button type="submit" id="book_now" onClick={handleClick}>BOOK NOW</button>
+        <div id="inputs_editing">
+            <div className="edit_forms">
+                <form>
+                    {error && <div id="unavail_message">Unable to add due to conflict!</div>}
+                    <div className="enter_new">Enter new special price: </div>
+                    <input className="edit_listing" type="text" placeholder="Start Date" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={start} onChange={(e) => setStart(e.target.value)}/>
+                    <input className="edit_listing" type="text" placeholder="End Date" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={end} onChange={(e) => setEnd(e.target.value)}/>
+                    <input className="edit_listing" type="text" placeholder="New Special Price"  value={price} onChange={(e) => setPrice(e.target.value)}/>
+                    <div className="bottom_button"><button type="submit" className="add_edit" onClick={handleClick}>ADD</button></div>
                 </form>
+            </div>
+
+            <div className="edit_forms">
+                <form>
+                    {error && <div id="unavail_message">Unable to add due to conflict!</div>}
+                    <div className="enter_new">Enter new unavailable date: </div>
+                    <input className="edit_listing" type="text" placeholder="Start Date" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={start} onChange={(e) => setStart(e.target.value)}/>
+                    <input className="edit_listing" type="text" placeholder="End Date" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} value={end} onChange={(e) => setEnd(e.target.value)}/>
+                    <div className="bottom_button"><button type="submit" className="add_edit" onClick={handleClick}>ADD</button></div>
+                </form>
+            </div>
         </div>
     </body>
     </>

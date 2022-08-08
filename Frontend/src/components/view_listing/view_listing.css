@@ -110,7 +110,6 @@
 #view_listing_second_row{
     display: flex;
     justify-content: space-around;
-    align-items: center;
     margin-bottom: 50px;
 }
 

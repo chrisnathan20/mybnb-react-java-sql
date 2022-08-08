@@ -61,6 +61,12 @@ public class Endpoint implements HttpHandler {
         else if (path.contains("/mybnb/getspecialprices")){
         	this.handleGetSpecialPrices(r);
         }
+        else if (path.contains("/mybnb/gettopamenities")){
+        	this.handleGetTopAmenities(r);
+        }
+        else if (path.contains("/mybnb/getlowestamenities")){
+        	this.handleGetLowestAmenities(r);
+        }
         else {
             r.sendResponseHeaders(500, -1);
             return;
@@ -162,6 +168,34 @@ public class Endpoint implements HttpHandler {
         System.out.println(arrOfStr[1]);
         try {
             String response = this.dao.getViewListings(Integer.parseInt(arrOfStr[1]));
+        	r.sendResponseHeaders(200, response.length());	
+            OutputStream os = r.getResponseBody();
+            os.write(response.getBytes());
+            os.close();    
+        } catch (Exception e) {
+            r.sendResponseHeaders(500, -1);
+            e.printStackTrace();
+            return;
+        }
+    }
+    
+    public void handleGetTopAmenities(HttpExchange r) throws IOException {
+        try {
+            String response = this.dao.getTopAmenities();
+        	r.sendResponseHeaders(200, response.length());	
+            OutputStream os = r.getResponseBody();
+            os.write(response.getBytes());
+            os.close();    
+        } catch (Exception e) {
+            r.sendResponseHeaders(500, -1);
+            e.printStackTrace();
+            return;
+        }
+    }
+    
+    public void handleGetLowestAmenities(HttpExchange r) throws IOException {
+        try {
+            String response = this.dao.getLowestAmenities();
         	r.sendResponseHeaders(200, response.length());	
             OutputStream os = r.getResponseBody();
             os.write(response.getBytes());
