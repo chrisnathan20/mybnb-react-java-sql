@@ -1,0 +1,39 @@
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.redirection{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 100px;
+    padding-bottom: 0px;
+    background-color: white;
+}
+
+#middle_navbar{
+    display: flex;
+}
+
+#explore{
+    margin-right: 80px;
+}
+
+#icon_button{
+    margin-top: -15px;
+    margin-bottom: 10px;
+}
+
+a:hover{
+    cursor:pointer;
+    color: #6C9C8E
+}
+
+#basic-menu{
+    color: red;
+}
