@@ -1,0 +1,60 @@
+#listing_available{
+    font-size: 24px;
+    background-color: #6C9C8E;
+    text-align: center;
+    width: 35%;
+    padding: 10px;
+    border-radius: 30px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.ccinfo{
+    border: none;
+    padding: 15px;
+    border-radius: 30px;
+    width: 97%;
+    background-color: #EFF2F5;
+    font-size: 16px;
+    margin: 10px;
+    margin-left: 0px;
+}
+
+#booking_available_card{
+    padding: 30px;
+    background-color: white;
+    box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.25);
+    border-radius: 45px;
+    width: 60%;
+    margin: auto;
+    margin-top: 100px;
+}
+
+#please_enter{
+    margin-top: 20px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+#total_cost{
+    font-weight: 600;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+#confirmation{
+    text-align: center;
+}
+
+#confirm_button{
+    border: none;
+    cursor: pointer;
+    border-radius: 40px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #6C9C8E;
+    margin-top: 10px;
+}

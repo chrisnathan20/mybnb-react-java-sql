@@ -8,6 +8,7 @@ import HostRegister from './components/host_register/host_register';
 import RenterRegister from './components/renter_register/renter_register';
 import Explore from './components/explore/explore';
 import ViewListing from './components/view_listing/view_listing';
+import BookingAvailable from './components/booking_available/booking_available';
 import {
   BrowserRouter as Router,
   Routes,
@@ -28,6 +29,7 @@ function App() {
           <Route path = '/renter-register' element={<RenterRegister/>}/>
           <Route path = '/view-listing/:id' element={<ViewListing/>}/>
           <Route path = '/explore/:id' element={<Explore/>}/>
+          <Route path = '/booking-available' element={<BookingAvailable/>}/>
         </Routes>
       </Router>
     </>
