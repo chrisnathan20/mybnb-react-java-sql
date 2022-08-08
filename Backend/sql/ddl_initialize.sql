@@ -83,8 +83,7 @@ CREATE TABLE Comment(
 
 CREATE TABLE host_listing(
     username varchar(20),
-    listing_id integer,
-    primary key(username, listing_id),
+    listing_id integer PRIMARY KEY,
     foreign key(username) references User(username),
     foreign key(listing_id) references Listing(listing_id));
 
