@@ -30,7 +30,7 @@ function MakeReviewHost() {
             body: JSON.stringify(requestbody)
         }).then(response => {
             if (response.ok){
-                navigate('/my-listing/' + myArray[0]);
+                navigate('/my-listings/' + myArray[0]);
             }
         })
     }
