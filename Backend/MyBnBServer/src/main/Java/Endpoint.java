@@ -290,6 +290,9 @@ public class Endpoint implements HttpHandler {
         else if (path.contains("/mybnb/addCommentRenter")){
             this.handleAddCommentRenter(r);
         }
+        else if (path.contains("/mybnb/addCommentHost")){
+            this.handleAddCommentHost(r);
+        }
         else if (path.contains("/mybnb/attemptbooking")){
             this.handleAttemptBooking(r);
         }
@@ -333,6 +336,47 @@ public class Endpoint implements HttpHandler {
                 int booking_id = Integer.parseInt(arrOfStr[1]);
                 
                 String forUsername = this.dao.getHostofBooking(booking_id);
+
+                
+                this.dao.addComment(fromUsername, forUsername, rating, title, content, booking_id);
+                r.sendResponseHeaders(200, -1);
+                
+            } catch (Exception e) {
+                r.sendResponseHeaders(500, -1);
+                e.printStackTrace();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+    }
+    
+    public void handleAddCommentHost(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            int rating;
+            String title, content;
+
+            if (deserialized.has("rating") && deserialized.has("title") && deserialized.has("content")) {
+            	rating = deserialized.getInt("rating");
+            	title = deserialized.getString("title");
+            	content = deserialized.getString("content");
+            } else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+
+            try {
+            	String path = r.getRequestURI().toString();
+            	String[] arrOfStr = path.split("&");
+            	System.out.println(Integer.parseInt(arrOfStr[0].split("/")[3]));
+                String fromUsername = sessionUsername.get(Integer.parseInt(arrOfStr[0].split("/")[3]));
+                int booking_id = Integer.parseInt(arrOfStr[1]);
+                
+                String forUsername = this.dao.getRenterofBooking(booking_id);
 
                 
                 this.dao.addComment(fromUsername, forUsername, rating, title, content, booking_id);

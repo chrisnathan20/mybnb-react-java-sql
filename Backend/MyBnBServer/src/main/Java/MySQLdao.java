@@ -387,6 +387,17 @@ public class MySQLdao {
     	
     }
     
+    public String getRenterofBooking(int booking_id) throws SQLException {
+    	
+    	PreparedStatement execStat2=connection.prepareStatement("select * from mybnb.booking_renter where booking_id =" + booking_id);
+    	ResultSet rs = execStat2.executeQuery();
+    	
+    	rs.next();
+    	
+    	return rs.getString("username");
+    	
+    }
+    
     public void addComment(String fromUsername, String forUsername, int rating, String title, String content, int booking_id) throws SQLException {
     	
     	PreparedStatement execStat1=connection.prepareStatement("insert into Comment(title, content, rating, forUsername, fromUsername) values('" + title + "', '" + content + "'," + rating + ", '" + forUsername + "', '"+ fromUsername + "')");
