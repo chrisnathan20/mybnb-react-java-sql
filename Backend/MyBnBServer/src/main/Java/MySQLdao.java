@@ -308,4 +308,42 @@ public class MySQLdao {
     	return rs.next(); 	
     	
     }
+    
+    public String getHostofBooking(int booking_id) throws SQLException {
+    	
+    	PreparedStatement execStat2=connection.prepareStatement("select * from mybnb.listing_unavailability where unavail_id =" + booking_id);
+    	ResultSet rs = execStat2.executeQuery();
+    	
+    	rs.next();
+    	
+    	int listing_id = rs.getInt("listing_id");
+    	
+    	PreparedStatement execStat=connection.prepareStatement("select * from mybnb.host_listing where listing_id = " + listing_id);
+    	ResultSet rs1 = execStat.executeQuery();
+    	
+    	rs1.next();
+    	
+    	return rs1.getString("username");
+    	
+    }
+    
+    public void addComment(String fromUsername, String forUsername, int rating, String title, String content, int booking_id) throws SQLException {
+    	
+    	PreparedStatement execStat1=connection.prepareStatement("insert into Comment(title, content, rating, forUsername, fromUsername) values('" + title + "', '" + content + "'," + rating + ", '" + forUsername + "', '"+ fromUsername + "')");
+    	execStat1.execute();
+    	
+    	
+    	PreparedStatement execStat2=connection.prepareStatement("select * from mybnb.Comment order by comment_id DESC;");
+    	ResultSet rs = execStat2.executeQuery();
+    	
+    	rs.next();
+    	
+    	int comment_id = rs.getInt("comment_id");
+    	System.out.println(booking_id);
+    	
+    	PreparedStatement execStat3=connection.prepareStatement("insert into booking_comment(booking_id, comment_id) values(" + booking_id + ", " + comment_id + ");");
+    	execStat3.execute();
+    	
+    	
+    }
 }
