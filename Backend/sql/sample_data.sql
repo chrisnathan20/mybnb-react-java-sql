@@ -338,3 +338,10 @@ insert into booking_renter(booking_id, username) values(22, 'renterD');
 insert into listing_unavailability(initial_date, end_date, listing_id) values(NULL, NULL, 18);
 insert into booking(booking_id, total_cost, status) values(23, 348.00, "cancelled");
 insert into booking_renter(booking_id, username) values(23, 'renterD');
+
+
+insert into Comment(title, content, rating, forUsername, fromUsername) values('First Time Staying Here, I love it!', 'This is my first time staying at this apartment, it was very cozy, comfortable, and clean. The Host was very welcoming and I would definitely would love to return', 5, 'hostA', 'renterA');
+insert into booking_comment(booking_id, comment_id) values(4, 1);
+
+insert into Comment(title, content, rating, forUsername, fromUsername) values('Second Time Staying Here, Even Better!', 'It was still very cozy, comfortable. The Host was very welcoming and I would definitely would love to return to this comfortable spot', 5, 'hostA', 'renterA');
+insert into booking_comment(booking_id, comment_id) values(3, 1);
