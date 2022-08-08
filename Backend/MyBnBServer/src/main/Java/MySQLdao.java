@@ -224,6 +224,42 @@ public class MySQLdao {
     	return rs.getString("count").toString();
     }
     
+    public String getReportC(String country) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT count(*) as count\r\n"
+    			+ "from listing\r\n"
+    			+ "where country=\""+country+"\"");
+    	ResultSet rs = execStat.executeQuery();
+    	
+    	rs.next();
+    	
+    	return rs.getString("count").toString();
+    }
+    
+    public String getReportD(String country, String city) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT count(*) as count\r\n"
+    			+ "from listing\r\n"
+    			+ "where country=\"" + country + "\" AND city=\"" + city + "\"");
+    	ResultSet rs = execStat.executeQuery();
+    	
+    	rs.next();
+    	
+    	return rs.getString("count").toString();
+    }
+    
+    public String getReportE(String country, String city, String postal_code) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT count(*) as count\r\n"
+    			+ "from listing\r\n"
+    			+ "where country=\"" + country + "\" AND city=\"" + city + "\" AND postal_code=\"" + postal_code + "\"");
+    	ResultSet rs = execStat.executeQuery();
+    	
+    	rs.next();
+    	
+    	return rs.getString("count").toString();
+    }
+    
     public String getListings(String sortby, String address, String city, String country, String postalcode, Double latitude, Double longitude, Double minprice, Double maxprice, int distance, String start, String end) throws SQLException {
     	
     	PreparedStatement execStat;
