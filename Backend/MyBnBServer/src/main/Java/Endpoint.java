@@ -522,6 +522,34 @@ public class Endpoint implements HttpHandler {
             r.sendResponseHeaders(500, -1);
         }
     }
+    
+    public void handleReportB(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String zip, start, end;
+
+            if (deserialized.has("zip") && deserialized.has("start") && deserialized.has("end")) {
+                zip = deserialized.getString("zip");
+                start = deserialized.getString("start");
+                end = deserialized.getString("end");
+                
+                String response = this.dao.getReportB(zip, start, end);
+            	r.sendResponseHeaders(200, response.length());	
+                OutputStream os = r.getResponseBody();
+                os.write(response.getBytes());
+                os.close();    
+                
+            } else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+    	} catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+    }
 
     public void handleCancelBooking(HttpExchange r) throws IOException {
     	String body = Utils.convert(r.getRequestBody());
