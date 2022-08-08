@@ -302,6 +302,54 @@ public class MySQLdao {
     	return response.toString();
     }
     
+    public String getReportI(String start, String end) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("select username\r\n"
+    			+ "from\r\n"
+    			+ "(select * \r\n"
+    			+ "from booking_renter, listing_unavailability\r\n"
+    			+ "where booking_id = unavail_id\r\n"
+    			+ "and initial_date between \"" + start + "\" and \"" + end + "\" \r\n"
+    			+ "and end_date between \"" + start + "\" and \"" + end + "\") as temp\r\n"
+    			+ "group by username\r\n"
+    			+ "order by count(*) DESC;");
+    	ResultSet rs = execStat.executeQuery();
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject host = new JSONObject();
+    		host.put("host", rs.getString("username"));
+
+    		response.add(host);
+    	}
+    	return response.toString();
+    }
+    
+    public String getReportJ(String start, String end, String city) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("select username, count(*)\r\n"
+    			+ "from\r\n"
+    			+ "(select listing.listing_id, city, username, booking_id\r\n"
+    			+ "from booking_renter, listing_unavailability, listing\r\n"
+    			+ "where booking_id = unavail_id\r\n"
+    			+ "and listing.listing_id = listing_unavailability.listing_id\r\n"
+    			+ "and initial_date between \"" + start + "\" and \"" + end + "\"\r\n"
+    			+ "and end_date between \"" + start + "\" and \"" + end + "\"\r\n"
+    			+ "and city = '" + city + "') as temp\r\n"
+    			+ "group by username\r\n"
+    			+ "order by count(*) desc;");
+    	ResultSet rs = execStat.executeQuery();
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject host = new JSONObject();
+    		host.put("host", rs.getString("username"));
+
+    		response.add(host);
+    	}
+    	return response.toString();
+    }
+    
     public String getReportK() throws SQLException {
     	
     	PreparedStatement execStat=connection.prepareStatement("SELECT username, count(*) as count\r\n"

@@ -380,6 +380,12 @@ public class Endpoint implements HttpHandler {
         else if (path.contains("/mybnb/reportL")){
             this.handleReportL(r);
         } 
+        else if (path.contains("/mybnb/reportI")){
+            this.handleReportI(r);
+        } 
+        else if (path.contains("/mybnb/reportJ")){
+            this.handleReportJ(r);
+        } 
         else if (path.contains("/mybnb/addlisting")){
             this.handleAddListing(r);
         }
@@ -738,6 +744,59 @@ public class Endpoint implements HttpHandler {
                 city = deserialized.getString("city");
                 
                 String response = this.dao.getReportG(city);
+            	r.sendResponseHeaders(200, response.length());	
+                OutputStream os = r.getResponseBody();
+                os.write(response.getBytes());
+                os.close();    
+                
+            } else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+    	} catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+    }
+    
+    public void handleReportI(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String start, end;
+
+            if (deserialized.has("start") && deserialized.has("start")) {
+                start = deserialized.getString("start");
+                end = deserialized.getString("end");
+                String response = this.dao.getReportI(start, end);
+            	r.sendResponseHeaders(200, response.length());	
+                OutputStream os = r.getResponseBody();
+                os.write(response.getBytes());
+                os.close();    
+                
+            } else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+    	} catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+    }
+    
+    public void handleReportJ(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String start, end, city;
+
+            if (deserialized.has("start") && deserialized.has("start") && deserialized.has("city")) {
+                start = deserialized.getString("start");
+                end = deserialized.getString("end");
+                city = deserialized.getString("city");
+                String response = this.dao.getReportJ(start, end, city);
             	r.sendResponseHeaders(200, response.length());	
                 OutputStream os = r.getResponseBody();
                 os.write(response.getBytes());
