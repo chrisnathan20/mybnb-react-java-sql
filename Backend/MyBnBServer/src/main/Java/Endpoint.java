@@ -317,6 +317,12 @@ public class Endpoint implements HttpHandler {
         else if (path.contains("/mybnb/deleteaccount")){
             this.handleDelete(r);
         }
+        else if (path.contains("/mybnb/setUnavailable")){
+            this.handleUnavailable(r);
+        }
+        else if (path.contains("/mybnb/setSpecial")){
+            this.handleSpecial(r);
+        }
         else if (path.contains("/mybnb/cancelbooking")){
             this.handleCancelBooking(r);
         }
@@ -373,6 +379,8 @@ public class Endpoint implements HttpHandler {
             return;
         }
     }
+    
+    
     
     public void handleAddListing(HttpExchange r) throws IOException {
     	String body = Utils.convert(r.getRequestBody());
@@ -791,6 +799,94 @@ public class Endpoint implements HttpHandler {
             e.printStackTrace();
             r.sendResponseHeaders(500, -1);
         }
+    }
+    
+    public void handleUnavailable(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String start, end;
+
+            if (deserialized.has("start_date") && deserialized.has("end_date")) {
+                start = deserialized.getString("start_date");
+                end = deserialized.getString("end_date");  
+            } 
+            else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+
+            try {
+            	String path = r.getRequestURI().toString();
+            	String[] arrOfStr = path.split("&");
+                int listing_id = Integer.parseInt(arrOfStr[1]);
+                
+                if(this.dao.isAvailable(listing_id, start, end)) {
+	                
+                	this.dao.addUnavailable(listing_id, start, end);
+                    r.sendResponseHeaders(200, -1);	
+                }
+                else {
+                	r.sendResponseHeaders(400, -1);
+                    return;
+                }
+                
+            } catch (Exception e) {
+                r.sendResponseHeaders(500, -1);
+                e.printStackTrace();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+
+    }
+    
+    public void handleSpecial(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String start, end;
+            Double price;
+
+            if (deserialized.has("start_date") && deserialized.has("end_date")) {
+                start = deserialized.getString("start_date");
+                end = deserialized.getString("end_date");
+                price = deserialized.getDouble("price");
+            } 
+            else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+
+            try {
+            	String path = r.getRequestURI().toString();
+            	String[] arrOfStr = path.split("&");
+                int listing_id = Integer.parseInt(arrOfStr[1]);
+                
+                if(this.dao.isAvailable(listing_id, start, end)) {
+	                
+                	this.dao.addSpecial(listing_id, start, end, price);
+                    r.sendResponseHeaders(200, -1);	
+                }
+                else {
+                	r.sendResponseHeaders(400, -1);
+                    return;
+                }
+                
+            } catch (Exception e) {
+                r.sendResponseHeaders(500, -1);
+                e.printStackTrace();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+
     }
    
     public void handleAttemptBooking(HttpExchange r) throws IOException {
