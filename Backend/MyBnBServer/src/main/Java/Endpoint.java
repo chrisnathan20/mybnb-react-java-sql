@@ -49,6 +49,12 @@ public class Endpoint implements HttpHandler {
         if (path.contains("/mybnb/getviewlisting")){
             this.handleGetViewListings(r);
         }
+        else if (path.contains("/mybnb/getRenterUpcomingListing")){
+            this.handleGetRenterUpcomingListings(r);
+        }
+        else if (path.contains("/mybnb/getRenterCompletedListing")){
+            this.handleGetRenterCompletedListings(r);
+        }
         else if (path.contains("/mybnb/getunavailability")){
         	this.handleGetUnavailability(r);
         }
@@ -113,6 +119,40 @@ public class Endpoint implements HttpHandler {
             r.sendResponseHeaders(500, -1);
         }
 
+    }
+    
+    public void handleGetRenterUpcomingListings(HttpExchange r) throws IOException {
+    	String path = r.getRequestURI().toString();
+    	String[] arrOfStr = path.split("&");
+        String username = sessionUsername.get(Integer.parseInt(arrOfStr[0].split("/")[3]));
+        try {
+            String response = this.dao.getRenterUpcomingListings(username);
+        	r.sendResponseHeaders(200, response.length());	
+            OutputStream os = r.getResponseBody();
+            os.write(response.getBytes());
+            os.close();    
+        } catch (Exception e) {
+            r.sendResponseHeaders(500, -1);
+            e.printStackTrace();
+            return;
+        }
+    }
+    
+    public void handleGetRenterCompletedListings(HttpExchange r) throws IOException {
+    	String path = r.getRequestURI().toString();
+    	String[] arrOfStr = path.split("&");
+        String username = sessionUsername.get(Integer.parseInt(arrOfStr[0].split("/")[3]));
+        try {
+            String response = this.dao.getRenterCompletedListings(username);
+        	r.sendResponseHeaders(200, response.length());	
+            OutputStream os = r.getResponseBody();
+            os.write(response.getBytes());
+            os.close();    
+        } catch (Exception e) {
+            r.sendResponseHeaders(500, -1);
+            e.printStackTrace();
+            return;
+        }
     }
     
     public void handleGetViewListings(HttpExchange r) throws IOException {

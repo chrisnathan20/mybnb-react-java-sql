@@ -148,10 +148,10 @@ public class MySQLdao {
     	
     	PreparedStatement execStat;
     	if(sortby.equals("price ascending")) {
-    		execStat=connection.prepareStatement("SELECT * from mybnb.listing where address like '%" + address + "%' and country like '%" + country + "%' and city like '%" + city + "%' and postal_code like '%" + postalcode + "%' and base_price >= " + minprice + " and base_price <= " + maxprice + "order by base_price ASC");
+    		execStat=connection.prepareStatement("SELECT * from mybnb.listing where address like '%" + address + "%' and country like '%" + country + "%' and city like '%" + city + "%' and postal_code like '%" + postalcode + "%' and base_price >= " + minprice + " and base_price <= " + maxprice + " and latitude IS NOT NULL order by base_price ASC");
     	}
     	else {
-    		execStat=connection.prepareStatement("SELECT * from mybnb.listing where address like '%" + address + "%' and country like '%" + country + "%' and city like '%" + city + "%' and postal_code like '%" + postalcode + "%' and base_price >= " + minprice + " and base_price <= " + maxprice + "order by base_price DESC");
+    		execStat=connection.prepareStatement("SELECT * from mybnb.listing where address like '%" + address + "%' and country like '%" + country + "%' and city like '%" + city + "%' and postal_code like '%" + postalcode + "%' and base_price >= " + minprice + " and base_price <= " + maxprice + " and latitude IS NOT NULL order by base_price DESC");
     	}
     	ResultSet rs = execStat.executeQuery();
     	
@@ -345,5 +345,63 @@ public class MySQLdao {
     	execStat3.execute();
     	
     	
+    }
+    
+    public String getRenterUpcomingListings(String username) throws SQLException {
+    	PreparedStatement execStat2=connection.prepareStatement("SELECT host_listing.username, booking.booking_id, booking.total_cost, listing_unavailability.initial_date, listing_unavailability.end_date, listing.address, listing.city, listing.country, listing_type.type_name FROM booking"
+    			+ " INNER JOIN booking_renter ON booking.booking_id=booking_renter.booking_id"
+    			+ " INNER JOIN listing_unavailability ON booking.booking_id=listing_unavailability.unavail_id"
+    			+ " INNER JOIN listing ON listing.listing_id=listing_unavailability.listing_id"
+    			+ " INNER JOIN listing_type ON listing.listing_id=listing_type.listing_id"
+    			+ " INNER JOIN host_listing ON listing.listing_id=host_listing.listing_id"
+    			+ " WHERE booking_renter.username = '" + username + "' and booking.status = 'upcoming';");
+    	ResultSet rs = execStat2.executeQuery();
+    	
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject res = new JSONObject();
+    		res.put("username", rs.getString("username"));
+    		res.put("type", rs.getString("type_name"));
+    		res.put("address", rs.getString("address"));
+    		res.put("city", rs.getString("city"));
+    		res.put("country", rs.getString("country"));
+    		res.put("start_date", rs.getDate("initial_date"));
+    		res.put("end_date", rs.getDate("end_date"));
+    		res.put("total_cost", rs.getDouble("total_cost"));
+    		res.put("booking_id", rs.getDouble("booking_id"));
+    		response.add(res);
+    	}
+    	
+    	return response.toString();
+    }
+    
+    public String getRenterCompletedListings(String username) throws SQLException {
+    	PreparedStatement execStat2=connection.prepareStatement("SELECT host_listing.username, booking.booking_id, booking.total_cost, listing_unavailability.initial_date, listing_unavailability.end_date, listing.address, listing.city, listing.country, listing_type.type_name FROM booking"
+    			+ " INNER JOIN booking_renter ON booking.booking_id=booking_renter.booking_id"
+    			+ " INNER JOIN listing_unavailability ON booking.booking_id=listing_unavailability.unavail_id"
+    			+ " INNER JOIN listing ON listing.listing_id=listing_unavailability.listing_id"
+    			+ " INNER JOIN listing_type ON listing.listing_id=listing_type.listing_id"
+    			+ " INNER JOIN host_listing ON listing.listing_id=host_listing.listing_id"
+    			+ " WHERE booking_renter.username = '" + username + "' and booking.status = 'completed';");
+    	ResultSet rs = execStat2.executeQuery();
+
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject res = new JSONObject();
+    		res.put("username", rs.getString("username"));
+    		res.put("type", rs.getString("type_name"));
+    		res.put("address", rs.getString("address"));
+    		res.put("city", rs.getString("city"));
+    		res.put("country", rs.getString("country"));
+    		res.put("start_date", rs.getDate("initial_date"));
+    		res.put("end_date", rs.getDate("end_date"));
+    		res.put("total_cost", rs.getDouble("total_cost"));
+    		res.put("booking_id", rs.getDouble("booking_id"));
+    		response.add(res);
+    	}
+    	
+    	return response.toString();
     }
 }
