@@ -406,7 +406,7 @@ public class MySQLdao {
     }
     
     public void deleteUser(String username) throws SQLException {
-    	PreparedStatement execStat1=connection.prepareStatement("update user set password = NULL where username = " + username);
+    	PreparedStatement execStat1=connection.prepareStatement("update user set password = NULL where username = \"" + username + "\"");
     	execStat1.execute();
     }
 }
