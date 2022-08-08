@@ -18,7 +18,7 @@ function BookingsConfirmed({booking}) {
         <div className='upcoming_body'>{booking.username}</div>
         <div className="upcoming_card_row">
             <div className='upcoming_body'>from {booking.start_date} to {booking.end_date}</div>
-            <button id="cancel" onClick={handleClick}>WRITE A REVIEW</button>
+            <button id="cancel" onClick={handleClick}>GIVE A COMMENT</button>
         </div>
         <div>
         </div>

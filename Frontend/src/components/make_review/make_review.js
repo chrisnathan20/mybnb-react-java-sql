@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './make_review.css'
-import { useNavigate } from 'react-router-dom';
 import { Rating } from '@mui/material';
+import { useNavigate, useParams } from "react-router-dom";
 
 function MakeReview() {
     const navigate = useNavigate();
@@ -11,34 +11,28 @@ function MakeReview() {
     const [content, setContent] = useState('');
     const [value, setValue] = useState(0);
 
+    const { id } = useParams();
+    const myArray = id.split("&");
+
     // handling clicking save changes button
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        /*var requestbody = new Object();
-        requestbody.username = username;
-        requestbody.password = password;
-        requestbody.name = name;
-        requestbody.address = address;
-        requestbody.country = country;
-        requestbody.city = city;
-        requestbody.postal_code = postalCode;
-        requestbody.dob = dob;
-        requestbody.sin = sin;
+        var requestbody = new Object();
+        requestbody.rating = value;
+        requestbody.title = title;
+        requestbody.content = content;
 
-        fetch('mybnb/register', {
+        fetch('/mybnb/addCommentRenter/' + id, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             credentials: "include",
             body: JSON.stringify(requestbody)
         }).then(response => {
             if (response.ok){
-                navigate('/login')
+                navigate('/explore/' + myArray[0]);
             }
-            else if (response.status == 400){
-                setError(true);
-            }
-        })*/
+        })
     }
     return (
         <>

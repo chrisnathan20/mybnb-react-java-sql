@@ -2,6 +2,23 @@ import React from 'react';
 import './my_bookings_card.css'
 
 function BookingsUpcoming({booking}) {
+
+  const handleClick = () => {
+    var requestbody = new Object();
+    requestbody.booking_id = booking.booking_id;
+
+    fetch('/mybnb/cancelbooking', {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        credentials: "include",
+        body: JSON.stringify(requestbody)
+    }).then(response => {
+        if (response.ok){
+            window.location.reload();
+        }
+    });
+  }
+
   return (
     <div id="booking_upcoming_card">
         <div id="upcoming_card_first" className="upcoming_card_row">
@@ -12,7 +29,7 @@ function BookingsUpcoming({booking}) {
         <div className='upcoming_body'>{booking.username}</div>
         <div className="upcoming_card_row">
             <div className='upcoming_body'>from {booking.start_date} to {booking.end_date}</div>
-            <button id="cancel">CANCEL</button>
+            <button id="cancel" onClick={handleClick}>CANCEL</button>
         </div>
         <div>
         </div>
