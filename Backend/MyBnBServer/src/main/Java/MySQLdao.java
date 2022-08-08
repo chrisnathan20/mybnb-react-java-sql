@@ -302,6 +302,27 @@ public class MySQLdao {
     	return response.toString();
     }
     
+    public String getReportK() throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT username, count(*) as count\r\n"
+    			+ "from (SELECT booking.booking_id, username\r\n"
+    			+ "from booking, booking_renter\r\n"
+    			+ "where booking.booking_id = booking_renter.booking_id and status='cancelled') as booking_user\r\n"
+    			+ "group by username\r\n"
+    			+ "order by count(*) DESC\r\n"
+    			+ "limit 1;");
+    	ResultSet rs = execStat.executeQuery();
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject host = new JSONObject();
+    		host.put("username", rs.getString("username"));
+
+    		response.add(host);
+    	}
+    	return response.toString();
+    }
+    
     public String getListings(String sortby, String address, String city, String country, String postalcode, Double latitude, Double longitude, Double minprice, Double maxprice, int distance, String start, String end) throws SQLException {
     	
     	PreparedStatement execStat;
