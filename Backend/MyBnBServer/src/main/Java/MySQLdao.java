@@ -302,6 +302,98 @@ public class MySQLdao {
     	return response.toString();
     }
     
+    public String getReportI(String start, String end) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("select username\r\n"
+    			+ "from\r\n"
+    			+ "(select * \r\n"
+    			+ "from booking_renter, listing_unavailability\r\n"
+    			+ "where booking_id = unavail_id\r\n"
+    			+ "and initial_date between \"" + start + "\" and \"" + end + "\" \r\n"
+    			+ "and end_date between \"" + start + "\" and \"" + end + "\") as temp\r\n"
+    			+ "group by username\r\n"
+    			+ "order by count(*) DESC;");
+    	ResultSet rs = execStat.executeQuery();
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject host = new JSONObject();
+    		host.put("host", rs.getString("username"));
+
+    		response.add(host);
+    	}
+    	return response.toString();
+    }
+    
+    public String getReportJ(String start, String end, String city) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("select username, count(*)\r\n"
+    			+ "from\r\n"
+    			+ "(select listing.listing_id, city, username, booking_id\r\n"
+    			+ "from booking_renter, listing_unavailability, listing\r\n"
+    			+ "where booking_id = unavail_id\r\n"
+    			+ "and listing.listing_id = listing_unavailability.listing_id\r\n"
+    			+ "and initial_date between \"" + start + "\" and \"" + end + "\"\r\n"
+    			+ "and end_date between \"" + start + "\" and \"" + end + "\"\r\n"
+    			+ "and city = '" + city + "') as temp\r\n"
+    			+ "group by username\r\n"
+    			+ "order by count(*) desc;");
+    	ResultSet rs = execStat.executeQuery();
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject host = new JSONObject();
+    		host.put("host", rs.getString("username"));
+
+    		response.add(host);
+    	}
+    	return response.toString();
+    }
+    
+    public String getReportK() throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT username, count(*) as count\r\n"
+    			+ "from (SELECT booking.booking_id, username\r\n"
+    			+ "from booking, booking_renter\r\n"
+    			+ "where booking.booking_id = booking_renter.booking_id and status='cancelled') as booking_user\r\n"
+    			+ "group by username\r\n"
+    			+ "order by count(*) DESC\r\n"
+    			+ "limit 1;");
+    	ResultSet rs = execStat.executeQuery();
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject host = new JSONObject();
+    		host.put("username", rs.getString("username"));
+
+    		response.add(host);
+    	}
+    	return response.toString();
+    }
+    
+    public String getReportL() throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT count(*)\r\n"
+    			+ "from \r\n"
+    			+ "(SELECT  booking_id, initial_date, end_date, listing.listing_id, listing.city\r\n"
+    			+ "from\r\n"
+    			+ "(SELECT booking_id, initial_date, end_date, listing_id\r\n"
+    			+ "from booking, listing_unavailability\r\n"
+    			+ "WHERE unavail_id = booking_id) AS BookingUnavail, listing\r\n"
+    			+ "where BookingUnavail.listing_id = listing.listing_id) as BookingListing\r\n"
+    			+ "WHERE city=\"Scarborough\";");
+    	ResultSet rs = execStat.executeQuery();
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject host = new JSONObject();
+    		host.put("username", rs.getString("username"));
+
+    		response.add(host);
+    	}
+    	return response.toString();
+    }
+    
     public String getListings(String sortby, String address, String city, String country, String postalcode, Double latitude, Double longitude, Double minprice, Double maxprice, int distance, String start, String end) throws SQLException {
     	
     	PreparedStatement execStat;

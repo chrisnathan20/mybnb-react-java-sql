@@ -87,7 +87,6 @@ function ViewListing() {
             <div id="special_prices_view"><SpecialPrice/></div>
             <div id="future_unavail_view"><FutureUnavail/></div>
         </div>
-        <div><Comment/></div>
     </body>
     </>
   )
