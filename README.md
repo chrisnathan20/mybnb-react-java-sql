@@ -31,7 +31,7 @@ User Manual:
 
 
 
-How to get Reports (All Requests are POST requests):
+How to get Reports (All Requests are POST requests and tested using Postman):
 
 Report 1: We would like to run a report and provide the total number of bookings in a specific date range by city. 
 - found by sending a request to http://localhost:8080/mybnb/reportA with body of "start" for start date, "end" for end date, "city" for city
@@ -62,6 +62,19 @@ city and country. This is a query that identifies the possible commercial
 hosts, something that the system should flag and prohibit.
 - found by sending a request to http://localhost:8080/mybnb/reportH with body of "city" for city, "country" for country
 
+
+Report 9: We would also like to rank the renters by the number of bookings in a specific time period 
+- found by sending a request to http://localhost:8080/mybnb/reportI with body of "start" for start date, "end" for end date
+
+
+Report 10: We would also like to rank the renters by the number of bookings in a specific time period per city
+- found by sending a request to http://localhost:8080/mybnb/reportJ with body of "start" for start date, "end" for end date, "city" for city
+
+Report 11: We would also like to report renter involved in the most number of cancellatons
+- found by sending a request to http://localhost:8080/mybnb/reportK with empty body
+
+Report 12: We would also like to report hosts involved in the most number of cancellatons
+- found by sending a request to http://localhost:8080/mybnb/reportL with empty body
 
 System Limitations:
 
