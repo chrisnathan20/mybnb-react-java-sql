@@ -109,11 +109,19 @@ public class MySQLdao {
     }
     
     public String getListings(String sortby, String address, String city, String country, String postalcode, Double latitude, Double longitude, Double minprice, Double maxprice, int distance, String start, String end) throws SQLException {
-
-    	PreparedStatement execStat=connection.prepareStatement("SELECT * from mybnb.listing where address like '%" + address + "%' and country like '%" + country + "%' and city like '%" + city + "%' and postal_code like '%" + postalcode + "%' and base_price >= " + minprice + " and base_price <= " + maxprice + "order by base_price ASC");
+    	
+    	PreparedStatement execStat;
+    	if(sortby.equals("price ascending")) {
+    		execStat=connection.prepareStatement("SELECT * from mybnb.listing where address like '%" + address + "%' and country like '%" + country + "%' and city like '%" + city + "%' and postal_code like '%" + postalcode + "%' and base_price >= " + minprice + " and base_price <= " + maxprice + "order by base_price ASC");
+    	}
+    	else {
+    		execStat=connection.prepareStatement("SELECT * from mybnb.listing where address like '%" + address + "%' and country like '%" + country + "%' and city like '%" + city + "%' and postal_code like '%" + postalcode + "%' and base_price >= " + minprice + " and base_price <= " + maxprice + "order by base_price DESC");
+    	}
     	ResultSet rs = execStat.executeQuery();
     	
     	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	System.out.println(start);
     	
     	while (rs.next()) {
     		
@@ -186,9 +194,6 @@ public class MySQLdao {
 	    		}
     		}
     	}
-
-    	
-    	System.out.println(response.toString());
     	return response.toString();
     }
     
@@ -201,5 +206,27 @@ public class MySQLdao {
     	ResultSet rs3 = execStat3.executeQuery();
     	
     	return !(rs1.next() || rs2.next() || rs3.next());
+    }
+    
+    public double getPrice(int id, String date) throws SQLException {
+    	double cost = -1;
+    	PreparedStatement execStat1=connection.prepareStatement("select * from mybnb.special_prices where listing_id = " + id + " and '" + date + "' between initial_date and end_date");
+    	ResultSet rs1 = execStat1.executeQuery();
+    	
+    	if(rs1.next()){
+    		cost = rs1.getDouble("price");
+    	}
+    	
+    	if(cost == -1) {
+        	PreparedStatement execStat2=connection.prepareStatement("select * from mybnb.listing where listing_id = " + id);
+        	ResultSet rs2 = execStat2.executeQuery();
+        	
+        	if(rs2.next()){
+        		cost = rs2.getDouble("base_price");
+        	}
+    	}
+    	
+    	return cost;
+    	
     }
 }

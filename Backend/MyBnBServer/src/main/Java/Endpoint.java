@@ -5,6 +5,8 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.Random;
 import org.json.*;
@@ -135,6 +137,9 @@ public class Endpoint implements HttpHandler {
         if (path.contains("/mybnb/getlisting")){
             this.handleGetListings(r);
         }
+        else if (path.contains("/mybnb/attemptbooking")){
+            this.handleAttemptBooking(r);
+        }
         else if (path.contains("/mybnb/register")){
             this.handleRegister(r);
         }
@@ -199,6 +204,67 @@ public class Endpoint implements HttpHandler {
         }
     }
    
+    public void handleAttemptBooking(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            String start, end;
+
+            if (deserialized.has("start_date") && deserialized.has("end_date")) {
+                start = deserialized.getString("start_date");
+                end = deserialized.getString("end_date");  
+            } 
+            else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+
+            try {
+            	double total = 0;
+            	String path = r.getRequestURI().toString();
+            	String[] arrOfStr = path.split("&");
+                int listing_id = Integer.parseInt(arrOfStr[1]);
+                
+                if(this.dao.isAvailable(listing_id, start, end)) {
+                	
+                	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                	Calendar c = Calendar.getInstance();
+                	
+                	
+	                while(!start.equals(end)) {
+	                	total = total + this.dao.getPrice(listing_id, start);
+	                	
+	                	c.setTime(sdf.parse(start));
+	                	c.add(Calendar.DATE, 1);  // number of days to add
+	                	start = sdf.format(c.getTime()); 	
+	                	
+	                	System.out.println(start);
+	                }
+	                
+	                String responseString = Double.toString(total);
+                    r.sendResponseHeaders(200, responseString.length());	
+                    OutputStream os = r.getResponseBody();
+                    os.write(responseString.getBytes());
+                    os.close();
+                }
+                else {
+                	r.sendResponseHeaders(400, -1);
+                    return;
+                }
+                
+            } catch (Exception e) {
+                r.sendResponseHeaders(500, -1);
+                e.printStackTrace();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
+        }
+
+    }
+    
     public void handleRegister(HttpExchange r) throws IOException {
     	String body = Utils.convert(r.getRequestBody());
     	
