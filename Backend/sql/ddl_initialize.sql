@@ -83,8 +83,7 @@ CREATE TABLE Comment(
 
 CREATE TABLE host_listing(
     username varchar(20),
-    listing_id integer,
-    primary key(username, listing_id),
+    listing_id integer PRIMARY KEY,
     foreign key(username) references User(username),
     foreign key(listing_id) references Listing(listing_id));
 
@@ -102,8 +101,8 @@ CREATE TABLE listing_type(
     foreign key(type_name) references Type(name));
 
 CREATE TABLE booking_comment(
-    booking_id integer PRIMARY KEY,
-    comment_id integer,
+    booking_id integer,
+    comment_id integer PRIMARY KEY,
     foreign key(booking_id) references Booking(booking_id),
     foreign key(comment_id) references Comment(comment_id));
 
