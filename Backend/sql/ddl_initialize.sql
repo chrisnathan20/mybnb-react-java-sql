@@ -102,8 +102,8 @@ CREATE TABLE listing_type(
     foreign key(type_name) references Type(name));
 
 CREATE TABLE booking_comment(
-    booking_id integer PRIMARY KEY,
-    comment_id integer,
+    booking_id integer,
+    comment_id integer PRIMARY KEY,
     foreign key(booking_id) references Booking(booking_id),
     foreign key(comment_id) references Comment(comment_id));
 
