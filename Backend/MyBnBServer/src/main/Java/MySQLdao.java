@@ -260,6 +260,48 @@ public class MySQLdao {
     	return rs.getString("count").toString();
     }
     
+    public String getReportF(String country) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT username, count(*) as count\r\n"
+    			+ "from (SELECT username, listing.listing_id, country, city\r\n"
+    			+ "from listing, host_listing\r\n"
+    			+ "where listing.listing_id = host_listing.listing_id\r\n"
+    			+ "and country=\""+ country + "\")" + "as listingHost\r\n"
+    			+ "group by username\r\n"
+    			+ "order by count(*) DESC;");
+    	ResultSet rs = execStat.executeQuery();
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject host = new JSONObject();
+    		host.put("host", rs.getString("username"));
+
+    		response.add(host);
+    	}
+    	return response.toString();
+    }
+    
+    public String getReportG(String city) throws SQLException {
+    	
+    	PreparedStatement execStat=connection.prepareStatement("SELECT username, count(*) as count\r\n"
+    			+ "from (SELECT username, listing.listing_id, country, city\r\n"
+    			+ "from listing, host_listing\r\n"
+    			+ "where listing.listing_id = host_listing.listing_id\r\n"
+    			+ "and city=\""+ city + "\")" + "as listingHost\r\n"
+    			+ "group by username\r\n"
+    			+ "order by count(*) DESC;");
+    	ResultSet rs = execStat.executeQuery();
+    	ArrayList<JSONObject> response = new ArrayList<JSONObject>();
+    	
+    	while(rs.next()) {
+    		JSONObject host = new JSONObject();
+    		host.put("host", rs.getString("username"));
+
+    		response.add(host);
+    	}
+    	return response.toString();
+    }
+    
     public String getListings(String sortby, String address, String city, String country, String postalcode, Double latitude, Double longitude, Double minprice, Double maxprice, int distance, String start, String end) throws SQLException {
     	
     	PreparedStatement execStat;
