@@ -2,10 +2,13 @@ import React from 'react';
 import './navbar.css'
 import {Menu, MenuItem, IconButton} from '@mui/material';
 import { Icon } from '@iconify/react';
+import { useParams } from 'react-router-dom';
 
 function HostNavbar() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
+    const {id} = useParams();
+    const myArray = id.split("&");
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -22,12 +25,12 @@ function HostNavbar() {
         </div>
         <div id="middle_navbar">
             <div>
-                <a href="#">
+                <a href={"/my-listings/" + myArray[0]}>
                     <span className="redirection" id="explore">My Listings</span>
                 </a>
             </div>
             <div>
-                <a href="#">
+                <a href={"/my-bookings/" + myArray[0]}>
                     <span className="redirection">My Bookings</span>
                 </a>
             </div>
