@@ -293,7 +293,8 @@ public class Endpoint implements HttpHandler {
         try {
         	String path = r.getRequestURI().toString();
         	String[] arrOfStr = path.split("&");
-            String username = sessionUsername.get(Integer.parseInt(arrOfStr[0]));
+        	System.out.println(Integer.parseInt(arrOfStr[0].split("/")[3]));
+            String username = sessionUsername.get(Integer.parseInt(arrOfStr[0].split("/")[3]));
             int listing_id = Integer.parseInt(arrOfStr[1]);
             String start = arrOfStr[2];
             String end = arrOfStr[3];

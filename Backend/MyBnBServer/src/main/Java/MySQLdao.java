@@ -249,7 +249,7 @@ public class MySQLdao {
     
     public void addBooking(String username, int listing_id, String start, String end, String cost) throws SQLException {
     	
-    	PreparedStatement execStat1=connection.prepareStatement("insert into listing_unavailability(initial_date, end_date, listing_id) values('" + start + ", " + end + "," + listing_id + ")");
+    	PreparedStatement execStat1=connection.prepareStatement("insert into listing_unavailability(initial_date, end_date, listing_id) values('" + start + "', '" + end + "'," + listing_id + ")");
     	execStat1.execute();
     	
     	
@@ -259,9 +259,14 @@ public class MySQLdao {
     	rs.next();
     	
     	int booking_id = rs.getInt("unavail_id");
+    	System.out.println(booking_id);
     	
-    	PreparedStatement execStat3=connection.prepareStatement("insert into booking(booking_id, total_cost, status) values(" + booking_id + ", " + cost + ", 'upcoming'); insert into booking_renter(booking_id, username) values(" + booking_id + ", " + username + "');");
+    	PreparedStatement execStat3=connection.prepareStatement("insert into booking(booking_id, total_cost, status) values(" + booking_id + ", " + cost + ", 'upcoming')");
     	execStat3.execute();
+    	
+    	execStat3=connection.prepareStatement("insert into booking_renter(booking_id, username) values(" + booking_id + ", '" + username + "');");
+    	execStat3.execute();
+    	
     	
     }
 }
