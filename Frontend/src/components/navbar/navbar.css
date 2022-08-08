@@ -6,6 +6,7 @@ a, a:hover, a:focus, a:active {
 .redirection{
     font-weight: bold;
     font-size: 20px;
+    margin-right: 60px;
 }
 
 nav{
@@ -18,10 +19,6 @@ nav{
 
 #middle_navbar{
     display: flex;
-}
-
-#explore{
-    margin-right: 80px;
 }
 
 #icon_button{

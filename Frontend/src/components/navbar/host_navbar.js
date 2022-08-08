@@ -30,8 +30,13 @@ function HostNavbar() {
                 </a>
             </div>
             <div>
-                <a href={"/my-bookings/" + myArray[0]}>
+                <a href={"/my-bookings-host/" + myArray[0]}>
                     <span className="redirection">My Bookings</span>
+                </a>
+            </div>
+            <div>
+                <a href="#">
+                    <span className="redirection">Host Toolkit</span>
                 </a>
             </div>
         </div>
