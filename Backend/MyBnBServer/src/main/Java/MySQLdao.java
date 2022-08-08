@@ -732,4 +732,27 @@ public class MySQLdao {
     	}
     
     }
+    
+    public String getReportH(String city, String country) throws SQLException {
+    	PreparedStatement execStat2=connection.prepareStatement("select count(listing_id) AS res from mybnb.listing where city = '" + city + "' and country = '" + country + "';");
+    	ResultSet rs = execStat2.executeQuery();
+    	
+    	rs.next();
+    	int i = rs.getInt("res") / 10;
+    	
+    	execStat2=connection.prepareStatement("select count(listing.listing_id) as count, username from mybnb.listing inner join host_listing ON listing.listing_id=host_listing.listing_id where city = '" + city + "' and country = '" + country + "' group by username;");
+    	rs = execStat2.executeQuery();
+    	
+    	ArrayList<String> response = new ArrayList<String>();
+    	
+    	while(rs.next()) {
+    		if(rs.getInt("count")>i) {
+    			response.add(rs.getString("username"));
+    		}
+    	}
+    	
+    	
+    	return response.toString();
+    	
+    }
 }
