@@ -59,7 +59,7 @@ public class Endpoint implements HttpHandler {
     	
     	try {
             JSONObject deserialized = new JSONObject(body);
-            String sortby, address, city, country, postalcode;
+            String sortby, address, city, country, postalcode, start, end;
             Double latitude, longitude, minprice, maxprice;
             int distance;
 
@@ -72,7 +72,8 @@ public class Endpoint implements HttpHandler {
                 city = deserialized.getString("city");
                 country = deserialized.getString("country");
                 postalcode = deserialized.getString("postalcode");
-                
+                start = deserialized.getString("start_date");
+                end = deserialized.getString("end_date");
                 latitude = deserialized.getDouble("latitude");
                 longitude = deserialized.getDouble("longitude");
                 minprice = deserialized.getDouble("minprice");
@@ -89,7 +90,7 @@ public class Endpoint implements HttpHandler {
             }
 
             try {
-            	String responseString = this.dao.getListings(sortby, address, city, country, postalcode, latitude, longitude, minprice, maxprice, distance);
+            	String responseString = this.dao.getListings(sortby, address, city, country, postalcode, latitude, longitude, minprice, maxprice, distance, start, end);
             	r.sendResponseHeaders(200, responseString.length());	
                 OutputStream os = r.getResponseBody();
                 os.write(responseString.getBytes());
