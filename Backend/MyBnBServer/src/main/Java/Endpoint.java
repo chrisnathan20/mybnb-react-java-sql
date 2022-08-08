@@ -161,6 +161,9 @@ public class Endpoint implements HttpHandler {
         else if (path.contains("/mybnb/attemptbooking")){
             this.handleAttemptBooking(r);
         }
+        else if (path.contains("/mybnb/booking")){
+            this.handleBooking(r);
+        }
         else if (path.contains("/mybnb/register")){
             this.handleRegister(r);
         }
@@ -282,6 +285,28 @@ public class Endpoint implements HttpHandler {
         } catch (Exception e) {
             e.printStackTrace();
             r.sendResponseHeaders(500, -1);
+        }
+
+    }
+    
+    public void handleBooking(HttpExchange r) throws IOException {
+        try {
+        	String path = r.getRequestURI().toString();
+        	String[] arrOfStr = path.split("&");
+            String username = sessionUsername.get(Integer.parseInt(arrOfStr[0]));
+            int listing_id = Integer.parseInt(arrOfStr[1]);
+            String start = arrOfStr[2];
+            String end = arrOfStr[3];
+            String cost = arrOfStr[4];
+
+            
+            this.dao.addBooking(username, listing_id, start, end, cost);
+            r.sendResponseHeaders(200, -1);
+            
+        } catch (Exception e) {
+            r.sendResponseHeaders(500, -1);
+            e.printStackTrace();
+            return;
         }
 
     }
