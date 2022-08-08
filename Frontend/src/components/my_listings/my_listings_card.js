@@ -7,8 +7,9 @@ function MyListingCard({listing}) {
     const { id } = useParams();
 
     let navigate = useNavigate();
-    function handleClick() {
-      navigate('/view-listing/'+ id + '&' + listing.listingId)
+    function handleEdit(){
+        console.log("yes i am editing");
+        navigate('/edit-listing/'+ id + '&' + listing.listingId)
     }
 
     return (
@@ -23,7 +24,7 @@ function MyListingCard({listing}) {
             </div>
             <div id="last_row">
                 <div id="distance"><Icon icon="tabler:world" inline={true} style={{ verticalAlign: '-0.3em', fontSize:'30px', marginRight: '7px'}}/>{listing.latitude}, {listing.longitude}</div>
-                <button id="delete_listing">Edit Listing</button>
+                <button id="delete_listing" handleClick={handleEdit}>Edit Listing</button>
             </div>
             <div id="last_row">
                 <div id="amenities"><Icon icon="bi:card-checklist" inline={true} style={{ verticalAlign: '-0.3em', fontSize:'30px', marginRight: '7px'}}/>{listing.amenities}</div>
