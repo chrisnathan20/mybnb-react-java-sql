@@ -7,9 +7,25 @@ function MyListingCard({listing}) {
     const { id } = useParams();
 
     let navigate = useNavigate();
-    function handleClick() {
-      navigate('/view-listing/'+ id + '&' + listing.listingId)
+    function handleEdit() {
+        navigate('/edit-listing/'+ id + '&' + listing.listingId)
     }
+
+    const handleDelete = () => {
+        var requestbody = new Object();
+        requestbody.listing_id = listing.listing_id;
+    
+        fetch('/mybnb/cancellisting', {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            credentials: "include",
+            body: JSON.stringify(requestbody)
+        }).then(response => {
+            if (response.ok){
+                window.location.reload();
+            }
+        });
+      }
 
     return (
         <div id="listing_card">
@@ -23,7 +39,7 @@ function MyListingCard({listing}) {
             </div>
             <div id="last_row">
                 <div id="distance"><Icon icon="tabler:world" inline={true} style={{ verticalAlign: '-0.3em', fontSize:'30px', marginRight: '7px'}}/>{listing.latitude}, {listing.longitude}</div>
-                <button id="delete_listing">Edit Listing</button>
+                <button id="delete_listing" onClick={handleEdit}>Edit Listing</button>
             </div>
             <div id="last_row">
                 <div id="amenities"><Icon icon="bi:card-checklist" inline={true} style={{ verticalAlign: '-0.3em', fontSize:'30px', marginRight: '7px'}}/>{listing.amenities}</div>
