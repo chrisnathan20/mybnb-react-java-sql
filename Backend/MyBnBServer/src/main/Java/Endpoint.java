@@ -179,6 +179,9 @@ public class Endpoint implements HttpHandler {
         if (path.contains("/mybnb/getlisting")){
             this.handleGetListings(r);
         }
+        else if (path.contains("/mybnb/cancelbooking")){
+            this.handleCancelBooking(r);
+        }
         else if (path.contains("/mybnb/attemptbooking")){
             this.handleAttemptBooking(r);
         }
@@ -194,6 +197,34 @@ public class Endpoint implements HttpHandler {
         else {
             r.sendResponseHeaders(500, -1);
             return;
+        }
+    }
+    
+    public void handleCancelBooking(HttpExchange r) throws IOException {
+    	String body = Utils.convert(r.getRequestBody());
+    	
+    	try {
+            JSONObject deserialized = new JSONObject(body);
+            int id;
+
+            if (deserialized.has("booking_id")) {
+                id = deserialized.getInt("booking_id");
+            } else {
+                r.sendResponseHeaders(400, -1);
+                return;
+            }
+
+            try {
+                this.dao.cancelBooking(id);
+                r.sendResponseHeaders(200, -1);
+            } catch (Exception e) {
+                r.sendResponseHeaders(500, -1);
+                e.printStackTrace();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            r.sendResponseHeaders(500, -1);
         }
     }
     
@@ -225,6 +256,13 @@ public class Endpoint implements HttpHandler {
                 	
                 	JSONObject response = new JSONObject();
                     response.put("sessionId", session);
+                    
+                    if(this.dao.isRenter(username)) {
+                    	response.put("type", "renter");
+                    }
+                    else {
+                    	response.put("type", "host");
+                    }
                     
                     String responseString = response.toString();
                     r.sendResponseHeaders(200, responseString.length());	
