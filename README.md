@@ -9,12 +9,12 @@ Assumptions:
 - unable to browse unless logged in
 - only renters can book listings
 - types are restricted to just 4 (apartment, full house, private room, shared room)
-- amenities are restricted to 10 (
+- amenities are restricted to 10 (Pool Access, Gym Access, Wifi, Kitchen, Washer, Dryer, Pets allowed, Bathtub, First-aid kit, Step-free entryway, Accessible bathroom)
 
 Challenges:
 - sample data was often tweaked to provide more variety in filtering so database was often deleted and reinitialized
 - initially attempted to use Spring Boot however due to time constraint and lack of technical knowledge, we opted to using a HttpServer in Java after 2-3 days attempting of learning Spring Boot
-- connecting react requests to the Java HttpServer Endpoints for the first time
+- connecting react requests to the Java HttpServer Endpoints for the first time took some time due to React configurations
 
 
 User Manual:
@@ -27,7 +27,7 @@ User Manual:
 
 - Run the frontend React Server by initially running npm install to handle dependencies and npm start to boot up the frontend
 
-- Start browsing through MyBnB by either signup up or logging in
+- Start browsing through MyBnB by either signup up or logging in as a Renter or as a Host
 
 
 
@@ -82,7 +82,7 @@ System Limitations:
 
 - No Input validation therefore entering NULL values or misformatted values may cause web app to crash due to failed database operations
 
-- Not all reports are fully implemented due to time constraint
+- Final report about common noun phrases in comments is not fully implemented due to time constraint
 
 - No real way to update 'upcoming' listings to completed real time
 
@@ -98,4 +98,5 @@ Future Improvement:
 
 - Full implementation of reports specified
 
-- Implement a method to update 'upcoming' listings to completed real time
+- Implement a method to update status of listings from 'upcoming' to 'completed' real time
+
