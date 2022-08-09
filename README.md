@@ -6,10 +6,13 @@ It is implemented using React as its frontend, Java as its backend and MySQL as 
 
 Assumptions:
 - fixed base price for listings but editable special prices, this decision is to satisfy the condition that the price change can only change on days that the listing is available
-- unable to browse unless logged in
+- unable to browse unless logged in as a Renter
 - only renters can book listings
 - types are restricted to just 4 (apartment, full house, private room, shared room)
 - amenities are restricted to 10 (Pool Access, Gym Access, Wifi, Kitchen, Washer, Dryer, Pets allowed, Bathtub, First-aid kit, Step-free entryway, Accessible bathroom)
+- Country is not functionally dependent on city (ex: Waterloo, Canada and Waterloo, Belgium)
+- City and Country is not functionally dependent on Postal Code as the Postal Code system is not unique worldwide
+- Address is not functionally dependent on Latitude and Longitude due to possibility of same latitude and longitude values but different address (ex: Same apartment but different unit number)
 
 Challenges:
 - sample data was often tweaked to provide more variety in filtering so database was often deleted and reinitialized
@@ -99,4 +102,6 @@ Future Improvement:
 - Full implementation of reports specified
 
 - Implement a method to update status of listings from 'upcoming' to 'completed' real time
+
+- Implement a method to convert user inputted address to longitude and latitude for the explore page filters
 
